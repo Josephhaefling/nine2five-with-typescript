@@ -3,9 +3,20 @@ import moment from 'moment';
 const shortid = require('shortid');
 const todaysDate = moment()
 
-interface personInfo {
-    person: Person;
-}
+interface Job {
+    jobId: string;
+    jobDate: string
+    businessName: string;
+    location: Location;
+    phone: string;
+    contactPerson: object;
+    personImage: object;
+    bathroomInfo: Bathroom;
+    breakroomInfo: number;
+    cost: number;
+    time: string;
+    employeeId: string;
+}   
 
 interface Person {
     cell: string;
@@ -19,6 +30,19 @@ interface Person {
     phone: string;
     picture: object;
     registered:object;
+    bathroomInfo: Bathroom;
+    businessName?: string;
+    breakroomInfo: number;
+    jobCost?: number;
+    userTime?: string;
+    jobTime?: string;
+    userId?: number;
+}
+
+interface Bathroom {
+    numBathrooms: number;
+    toiletsPerBathroom: number;
+    sinksPerBathroom: number;
 }
 
 interface Location {
@@ -36,14 +60,17 @@ interface Street {
     name: string;
 }
 
+interface UseApp {
+    businessList: object[];
+    availableJobs: object[];
+}
 
-
-function useApp(availableJobsList : object[]) {
+function useApp(availableJobsList : object[]) : UseApp {
     
     const jobsList = availableJobsList
     const [error, setError] = useState('')
-    const [businessList, setBusinessList] = useState([])
-    const [availableJobs, setAvailableJobs] = useState([])
+    const [businessList, setBusinessList] = useState <object[]> ([])
+    const [availableJobs, setAvailableJobs] = useState <object[]> ([])
     const businessNames = [
         "Brothers", "Ophelia's", "Oskar Blues", "Slice Works", "Garbanzo", "Turing School of Software and Design",
         "Randos Bar & Grill", "Migration Taco", "Jax", "Whole Foods", "Union Station", "REI", "Tupelo Honey",
@@ -80,21 +107,16 @@ function useApp(availableJobsList : object[]) {
 
     const addBusinessListToState = async () => {
         const people = await getRandomPeople()
-        
-        const peopleInColo = movePeopleToColo(people.results)
-        console.log('people in colo', peopleInColo);
-        
-        // const businessList = await turnPeopleIntoBusiness(peopleInColo)
-        // const availableJobs = await createJob(businessList)
-        // setBusinessList(businessList)
-        // setAvailableJobs(availableJobs)
+        const peopleInColo = movePeopleToColo(people.results)   
+        const businessList = turnPeopleIntoBusiness(peopleInColo)                
+        const availableJobs = createJob(businessList)        
+        setBusinessList(businessList)
+        setAvailableJobs(availableJobs)
     }
 
-    const movePeopleToColo = (peopleInfo : Person[]) => {
+    const movePeopleToColo = (peopleInfo : Person[]) : Person[] => {
         
-        return peopleInfo.map((person : Person) => {
-            console.log('person', person.location);
-            
+        return peopleInfo.map((person : Person) => {            
             const { street } = person.location 
             const location = {
                 street: street,
@@ -108,70 +130,66 @@ function useApp(availableJobsList : object[]) {
         })
     }
 
-//     const turnPeopleIntoBusiness = (peopleInfo : object[]) => {
-//         return peopleInfo.map(person => {
-//             const randomBusiness = businessNames[Math.floor(Math.random() * businessNames.length)];
-//             const businessBathrooms = numBathrooms[Math.floor(Math.random() * numBathrooms.length)];
-//             const businessToiletsPerBathroom = toiletsPerBathroom[Math.floor(Math.random() * toiletsPerBathroom.length)];
-//             const businessSinksPerBathroom = businessToiletsPerBathroom
-//             const businessBreakrooms = numBreakrooms[Math.floor(Math.random() * numBreakrooms.length)];
+    const turnPeopleIntoBusiness = (peopleInfo : Person[]) : Person[] => {
+        return peopleInfo.map(person => {
+            const randomBusiness = businessNames[Math.floor(Math.random() * businessNames.length)];
+            const businessBathrooms = numBathrooms[Math.floor(Math.random() * numBathrooms.length)];
+            const businessToiletsPerBathroom = toiletsPerBathroom[Math.floor(Math.random() * toiletsPerBathroom.length)];
+            const businessSinksPerBathroom = businessToiletsPerBathroom
+            const businessBreakrooms = numBreakrooms[Math.floor(Math.random() * numBreakrooms.length)];
 
-//             person.bathroomInfo = {numBathrooms: businessBathrooms, toiletsPerBathroom: businessToiletsPerBathroom, sinksPerBathroom: businessToiletsPerBathroom}
-//             person.businessName = randomBusiness
-//             person.breakroomInfo = businessBreakrooms
-//             return person
-//         })
-//     }
+            person.bathroomInfo = {numBathrooms: businessBathrooms, toiletsPerBathroom: businessToiletsPerBathroom, sinksPerBathroom: businessToiletsPerBathroom}
+            person.businessName = randomBusiness            
+            person.breakroomInfo = businessBreakrooms
+            return person
+        })
+    }
 
-//     const createCost = (currentBusiness) => {
-//           const { numBathrooms, toiletsPerBathroom, sinksPerBathroom } = currentBusiness.bathroomInfo
-//           const { breakroomInfo } = currentBusiness
-//           const travelFee = 5
-//           const cleanBreakroomFee = breakroomInfo * 5
-//           const cleanBathroomFee = (numBathrooms * toiletsPerBathroom * 1.00) + (numBathrooms * sinksPerBathroom * .50)
-//           const time = jobTime[Math.floor(Math.random() * jobTime.length)]
-//           const userAssigned = userId[Math.floor(Math.random() * userId.length)]
-//           const suppliesCost = suppliesFee[Math.floor(Math.random() * suppliesFee.length)];
-//           const cost = travelFee + cleanBathroomFee + cleanBreakroomFee + suppliesCost
-//           currentBusiness.jobCost = cost
-//           currentBusiness.jobTime = time
-//           currentBusiness.userId = userAssigned
-//           return currentBusiness
-//     }
+    const createCost = (currentBusiness : Person ) : Person => {
+        const { numBathrooms , toiletsPerBathroom, sinksPerBathroom } = currentBusiness.bathroomInfo
+          const { breakroomInfo } = currentBusiness
+          const travelFee = 5
+          const cleanBreakroomFee = breakroomInfo * 5
+          const cleanBathroomFee = (numBathrooms * toiletsPerBathroom * 1.00) + (numBathrooms * sinksPerBathroom * .50)
+          const time = jobTime[Math.floor(Math.random() * jobTime.length)]
+          const userAssigned = userId[Math.floor(Math.random() * userId.length)]
+          const suppliesCost = suppliesFee[Math.floor(Math.random() * suppliesFee.length)];
+          const cost = travelFee + cleanBathroomFee + cleanBreakroomFee + suppliesCost
+          currentBusiness.jobCost = cost
+          currentBusiness.jobTime = time
+          currentBusiness.userId = userAssigned
+          return currentBusiness
+    }
 
 
-//     const createJob = (businessList) => {
-//       const jobWithCost = businessList.map(business => createCost(business))
-//       const availableJobs =  jobWithCost.map(job => {
-//       const { bathroomInfo, breakroomInfo, location, phone, picture, name, businessName, jobCost, userTime, jobTime, userId} = job
-//         const newJob = {
-//             jobId: shortid.generate(),
-//             jobDate: todaysDate.format('MM/DD/YYYY'),
-//             businessName: businessName,
-//             location: location,
-//             phone: phone,
-//             contactPerson: name,
-//             personImage: picture,
-//             bathroomInfo: bathroomInfo,
-//             breakroomInfo: breakroomInfo,
-//             cost: jobCost,
-//             time: jobTime,
-//             employeeId: userId
-//           }
-//           return newJob
-//       })
-//       return availableJobs
-//     }
+    const createJob = (businessList : Person[]) : object[] => {        
+      const jobWithCost = businessList.map(business => createCost(business))      
+      const availableJobs =  jobWithCost.map(job => {
+      const { bathroomInfo, breakroomInfo, location, phone, picture, name, businessName, jobCost, jobTime, userId } = job
+        const newJob = {
+            jobId: shortid.generate(),
+            jobDate: todaysDate.format('MM/DD/YYYY'),
+            businessName: businessName,
+            location: location,
+            phone: phone,
+            contactPerson: name,
+            personImage: picture,
+            bathroomInfo: bathroomInfo,
+            breakroomInfo: breakroomInfo,
+            cost: jobCost,
+            time: jobTime,
+            employeeId: userId
+          }
+          return newJob
+      })            
+      return availableJobs
+    }
 
     useEffect(() => {
-
         addBusinessListToState()
     }, [])
 
-    if(jobsList.length === 0) {
-      return { businessList: businessList, availableJobs: availableJobs }
-    }
-
+      return { businessList: businessList, availableJobs: availableJobs }    
 }
 
 

@@ -81,21 +81,23 @@ function useApp(availableJobsList) {
             .then(function (res) { return res.json(); });
     };
     var addBusinessListToState = function () { return __awaiter(_this, void 0, void 0, function () {
-        var people, peopleInColo;
+        var people, peopleInColo, businessList, availableJobs;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getRandomPeople()];
                 case 1:
                     people = _a.sent();
                     peopleInColo = movePeopleToColo(people.results);
-                    console.log('people in colo', peopleInColo);
+                    businessList = turnPeopleIntoBusiness(peopleInColo);
+                    availableJobs = createJob(businessList);
+                    setBusinessList(businessList);
+                    setAvailableJobs(availableJobs);
                     return [2 /*return*/];
             }
         });
     }); };
     var movePeopleToColo = function (peopleInfo) {
         return peopleInfo.map(function (person) {
-            console.log('person', person.location);
             var street = person.location.street;
             var location = {
                 street: street,
@@ -108,61 +110,59 @@ function useApp(availableJobsList) {
             return person;
         });
     };
-    //     const turnPeopleIntoBusiness = (peopleInfo : object[]) => {
-    //         return peopleInfo.map(person => {
-    //             const randomBusiness = businessNames[Math.floor(Math.random() * businessNames.length)];
-    //             const businessBathrooms = numBathrooms[Math.floor(Math.random() * numBathrooms.length)];
-    //             const businessToiletsPerBathroom = toiletsPerBathroom[Math.floor(Math.random() * toiletsPerBathroom.length)];
-    //             const businessSinksPerBathroom = businessToiletsPerBathroom
-    //             const businessBreakrooms = numBreakrooms[Math.floor(Math.random() * numBreakrooms.length)];
-    //             person.bathroomInfo = {numBathrooms: businessBathrooms, toiletsPerBathroom: businessToiletsPerBathroom, sinksPerBathroom: businessToiletsPerBathroom}
-    //             person.businessName = randomBusiness
-    //             person.breakroomInfo = businessBreakrooms
-    //             return person
-    //         })
-    //     }
-    //     const createCost = (currentBusiness) => {
-    //           const { numBathrooms, toiletsPerBathroom, sinksPerBathroom } = currentBusiness.bathroomInfo
-    //           const { breakroomInfo } = currentBusiness
-    //           const travelFee = 5
-    //           const cleanBreakroomFee = breakroomInfo * 5
-    //           const cleanBathroomFee = (numBathrooms * toiletsPerBathroom * 1.00) + (numBathrooms * sinksPerBathroom * .50)
-    //           const time = jobTime[Math.floor(Math.random() * jobTime.length)]
-    //           const userAssigned = userId[Math.floor(Math.random() * userId.length)]
-    //           const suppliesCost = suppliesFee[Math.floor(Math.random() * suppliesFee.length)];
-    //           const cost = travelFee + cleanBathroomFee + cleanBreakroomFee + suppliesCost
-    //           currentBusiness.jobCost = cost
-    //           currentBusiness.jobTime = time
-    //           currentBusiness.userId = userAssigned
-    //           return currentBusiness
-    //     }
-    //     const createJob = (businessList) => {
-    //       const jobWithCost = businessList.map(business => createCost(business))
-    //       const availableJobs =  jobWithCost.map(job => {
-    //       const { bathroomInfo, breakroomInfo, location, phone, picture, name, businessName, jobCost, userTime, jobTime, userId} = job
-    //         const newJob = {
-    //             jobId: shortid.generate(),
-    //             jobDate: todaysDate.format('MM/DD/YYYY'),
-    //             businessName: businessName,
-    //             location: location,
-    //             phone: phone,
-    //             contactPerson: name,
-    //             personImage: picture,
-    //             bathroomInfo: bathroomInfo,
-    //             breakroomInfo: breakroomInfo,
-    //             cost: jobCost,
-    //             time: jobTime,
-    //             employeeId: userId
-    //           }
-    //           return newJob
-    //       })
-    //       return availableJobs
-    //     }
+    var turnPeopleIntoBusiness = function (peopleInfo) {
+        return peopleInfo.map(function (person) {
+            var randomBusiness = businessNames[Math.floor(Math.random() * businessNames.length)];
+            var businessBathrooms = numBathrooms[Math.floor(Math.random() * numBathrooms.length)];
+            var businessToiletsPerBathroom = toiletsPerBathroom[Math.floor(Math.random() * toiletsPerBathroom.length)];
+            var businessSinksPerBathroom = businessToiletsPerBathroom;
+            var businessBreakrooms = numBreakrooms[Math.floor(Math.random() * numBreakrooms.length)];
+            person.bathroomInfo = { numBathrooms: businessBathrooms, toiletsPerBathroom: businessToiletsPerBathroom, sinksPerBathroom: businessToiletsPerBathroom };
+            person.businessName = randomBusiness;
+            person.breakroomInfo = businessBreakrooms;
+            return person;
+        });
+    };
+    var createCost = function (currentBusiness) {
+        var _a = currentBusiness.bathroomInfo, numBathrooms = _a.numBathrooms, toiletsPerBathroom = _a.toiletsPerBathroom, sinksPerBathroom = _a.sinksPerBathroom;
+        var breakroomInfo = currentBusiness.breakroomInfo;
+        var travelFee = 5;
+        var cleanBreakroomFee = breakroomInfo * 5;
+        var cleanBathroomFee = (numBathrooms * toiletsPerBathroom * 1.00) + (numBathrooms * sinksPerBathroom * .50);
+        var time = jobTime[Math.floor(Math.random() * jobTime.length)];
+        var userAssigned = userId[Math.floor(Math.random() * userId.length)];
+        var suppliesCost = suppliesFee[Math.floor(Math.random() * suppliesFee.length)];
+        var cost = travelFee + cleanBathroomFee + cleanBreakroomFee + suppliesCost;
+        currentBusiness.jobCost = cost;
+        currentBusiness.jobTime = time;
+        currentBusiness.userId = userAssigned;
+        return currentBusiness;
+    };
+    var createJob = function (businessList) {
+        var jobWithCost = businessList.map(function (business) { return createCost(business); });
+        var availableJobs = jobWithCost.map(function (job) {
+            var bathroomInfo = job.bathroomInfo, breakroomInfo = job.breakroomInfo, location = job.location, phone = job.phone, picture = job.picture, name = job.name, businessName = job.businessName, jobCost = job.jobCost, jobTime = job.jobTime, userId = job.userId;
+            var newJob = {
+                jobId: shortid.generate(),
+                jobDate: todaysDate.format('MM/DD/YYYY'),
+                businessName: businessName,
+                location: location,
+                phone: phone,
+                contactPerson: name,
+                personImage: picture,
+                bathroomInfo: bathroomInfo,
+                breakroomInfo: breakroomInfo,
+                cost: jobCost,
+                time: jobTime,
+                employeeId: userId
+            };
+            return newJob;
+        });
+        return availableJobs;
+    };
     react_1.useEffect(function () {
         addBusinessListToState();
     }, []);
-    if (jobsList.length === 0) {
-        return { businessList: businessList, availableJobs: availableJobs };
-    }
+    return { businessList: businessList, availableJobs: availableJobs };
 }
 exports["default"] = useApp;

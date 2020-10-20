@@ -24,162 +24,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var react_1 = __importStar(require("react"));
 require("./App.css");
+var react_router_dom_1 = require("react-router-dom");
 var UseApp_1 = __importDefault(require("../App/UseApp"));
+var Header_1 = __importDefault(require("../Header/Header"));
+var OptionsPage_1 = __importDefault(require("../OptionsPage/OptionsPage"));
+var JobsContainer_1 = __importDefault(require("../JobsContainer/JobsContainer"));
+var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
 // import JobsContainer from '../JobsContainer/JobsContainer'
 // import StartJob from '../StartJob/StartJob'
 // import RateBusiness from '../RateBusiness/RateBusiness'
 // import Options from '../Options/Options'
-// import Header from '../Header/Header'
 // import CompletedJobs from '../CompletedJobs/CompletedJobs'
 // import Favorites from '../Favorites/Favorites'
 function App() {
     var _a = react_1.useState([]), availableJobsList = _a[0], setAvailableJobsList = _a[1];
-    UseApp_1["default"](availableJobsList);
-    return (react_1["default"].createElement("p", null, "hi"));
-    // const [ currentJob, setCurrentJob ] = useState({})
-    // const [ completedJobs, setCompletedJobs ] = useState([])
-    // const [ currentBusinessList, setBusinessList ] = useState([])
-    // const [ currentUsersJobs, setCurrentUsersJobs ] = useState([])
-    // const [ endTime, setEndTime ] = useState('')
-    // const [ favoriteJobs, setFavoriteJobs ] = useState([])
-    // const [ isOnHomePage, setIsOnHomePage ] = useState(true)
-    // const [ jobIsComplete, setJobIsComplete ] = useState(false)
-    // const [ jobIsStarted, setJobIsStarted ] = useState(false)
-    // const [ startTime, setStartTime ] = useState('')
-    // const [ userId, setUseId ] = useState(3)
-    // const { businessList, availableJobs } = useApp(availableJobsList) || {businessList: currentBusinessList, availableJobs: availableJobsList}
-    // const findJob = (jobId) => {
-    //   return favoriteJobs.find(job => job.jobId === jobId)
-    // }
-    // const removeFromFavorites = (event) => {
-    //   const removeId = event.target.name
-    //   const jobToRemove = findJob(removeId)
-    //   const newFavsArray = favoriteJobs.filter(job => job.jobId !== jobToRemove.jobId)
-    //   setFavoriteJobs(newFavsArray)
-    // }
-    // const mainPage = (
-    //   <section data-testid="App" className="App">
-    //     <main data-testid="main-page" className="main-page">
-    //       <section data-testid="user-info-section" className="userInfo-section">
-    //         <h3 data-testid="user-greeting" className="user-greeting">Welcome Back, Michael!</h3>
-    //       </section>
-    //       {/* <JobsContainer
-    //         currentUser={ userId }
-    //         currentUsersJobs={ currentUsersJobs }
-    //         favoriteJobs={ favoriteJobs }
-    //         findJob={ findJob }
-    //         jobs={ availableJobsList }
-    //         removeFromFavorites={ removeFromFavorites }
-    //         setCurrentJob={ setCurrentJob }
-    //         setCurrentUsersJobs={setCurrentUsersJobs}
-    //         setFavoriteJobs={ setFavoriteJobs }
-    //       /> */}
-    //     </main>
-    //   </section>
-    // )
-    // useEffect(() => {
-    //   setBusinessList(businessList)
-    //   setAvailableJobsList(availableJobs)
-    // })
-    // return (
-    //   <Switch>
-    //   <Route
-    //     exact path="/Favorite-Jobs"
-    //     render={(routeProps) => {
-    //       const { params } = routeProps.match
-    //       const { id } = params
-    //       return (
-    //         <section>
-    //           {/* <Header isOnHomePage={ isOnHomePage } setIsOnHomePage={ setIsOnHomePage } /> */}
-    //           {/* <Favorites favoriteJobs={ favoriteJobs }/> */}
-    //         </section>
-    //       )
-    //     }}
-    //   />
-    //   <Route
-    //     exact path="/Completed-Jobs"
-    //     render={(routeProps) => {
-    //       const { params } = routeProps.match
-    //       const { id } = params
-    //       return (
-    //         <section>
-    //           {/* <Header isOnHomePage={ isOnHomePage } setIsOnHomePage={ setIsOnHomePage } /> */}
-    //           {/* <CompletedJobs completedJobs={ completedJobs }/> */}
-    //         </section>
-    //       )
-    //     }}
-    //   />
-    //   <Route
-    //     exact path="/Options"
-    //     render={(routeProps) => {
-    //       const { params } = routeProps.match
-    //       const { id } = params
-    //       return (
-    //         <section>
-    //           {/* <Header isOnHomePage={ isOnHomePage } setIsOnHomePage={ setIsOnHomePage } /> */}
-    //           {/* <Options /> */}
-    //         </section>
-    //       )
-    //     }}
-    //   />
-    //   <Route
-    //     exact path="/RateBusiness"
-    //     render={(routeProps) => {
-    //       const { params } = routeProps.match
-    //       const { id } = params
-    //       return (
-    //         <section>
-    //         {/* <Header isOnHomePage={ isOnHomePage } setIsOnHomePage={ setIsOnHomePage } /> */}
-    //         {/* <RateBusiness
-    //           availableJobsList={ availableJobsList }
-    //           completedJobs={ completedJobs }
-    //           currentJob={ currentJob }
-    //           favoriteJobs={ favoriteJobs }
-    //           jobIsStarted={ jobIsStarted }
-    //           setAvailableJobs={ setAvailableJobsList }
-    //           setCompletedJobs={ setCompletedJobs }
-    //           setCurrentJob={ setCurrentJob }
-    //           setFavoriteJobs={ setFavoriteJobs }
-    //           setJobIsStarted={ setJobIsStarted }
-    //         /> */}
-    //         </section>
-    //       )
-    //     }}
-    //   />
-    //   <Route
-    //     exact path="/:currentJob"
-    //     render={(routeProps) => {
-    //       const { params } = routeProps.match
-    //       const { id } = params
-    //       return (
-    //         <section>
-    //         {/* <Header isOnHomePage={ isOnHomePage } setIsOnHomePage={ setIsOnHomePage } /> */}
-    //         {/* <StartJob
-    //           {...routeProps}
-    //           jobInfo={ currentJob }
-    //           setCurrentJob={ setCurrentJob }
-    //           jobIsStarted={ jobIsStarted }
-    //           setJobIsStarted={ setJobIsStarted }
-    //           setJobIsComplete={ setJobIsComplete }
-    //           setStartTime={ setStartTime }
-    //           setEndTime={ setEndTime }
-    //           avavialbleJobsList={ availableJobsList }
-    //           setAvailableJobsList={ setAvailableJobsList }
-    //           setStartTime={ setStartTime }
-    //         /> */}
-    //         </section>
-    //       )
-    //     }}
-    //   />
-    //     <Route exact path="/" render={() => {
-    //       return (
-    //       <section>
-    //         {/* <Header isOnHomePage={ isOnHomePage } setIsOnHomePage={ setIsOnHomePage } /> */}
-    //         {mainPage}
-    //       </section>
-    //     )
-    //     }} />
-    //   </Switch>
-    // );
+    var _b = react_1.useState({}), currentJob = _b[0], setCurrentJob = _b[1];
+    var _c = react_1.useState([]), completedJobs = _c[0], setCompletedJobs = _c[1];
+    var _d = react_1.useState([]), currentBusinessList = _d[0], setBusinessList = _d[1];
+    var _e = react_1.useState(''), endTime = _e[0], setEndTime = _e[1];
+    var _f = react_1.useState([]), favoriteJobs = _f[0], setFavoriteJobs = _f[1];
+    var _g = react_1.useState(true), isOnHomePage = _g[0], setIsOnHomePage = _g[1];
+    var _h = react_1.useState(false), jobIsComplete = _h[0], setJobIsComplete = _h[1];
+    var _j = react_1.useState(false), jobIsStarted = _j[0], setJobIsStarted = _j[1];
+    var _k = react_1.useState(''), startTime = _k[0], setStartTime = _k[1];
+    var _l = react_1.useState(3), userId = _l[0], setUseId = _l[1];
+    var _m = UseApp_1["default"](availableJobsList) || { businessList: currentBusinessList, availableJobs: availableJobsList }, businessList = _m.businessList, availableJobs = _m.availableJobs;
+    // console.log('app', availableJobs);
+    var mainPage = (react_1["default"].createElement("section", { "data-testid": "App", className: "main-page" },
+        react_1["default"].createElement("main", { "data-testid": "main-page", className: "main-page" },
+            react_1["default"].createElement("section", { "data-testid": "user-info-section", className: "userInfo-section" },
+                react_1["default"].createElement("h3", { "data-testid": "user-greeting", className: "user-greeting" }, "Welcome Back, Michael!")),
+            react_1["default"].createElement(JobsContainer_1["default"], { availableJobs: availableJobsList, userId: userId }))));
+    react_1.useEffect(function () {
+        setBusinessList(businessList);
+        setAvailableJobsList(availableJobs);
+    }, [availableJobs, businessList]);
+    return (react_1["default"].createElement("section", null,
+        react_1["default"].createElement(Header_1["default"], { isHome: isOnHomePage }),
+        react_1["default"].createElement(react_router_dom_1.Switch, null,
+            react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName", render: function () {
+                    return react_1["default"].createElement(JobPage_1["default"], { currentJob: currentJob });
+                } }),
+            react_1["default"].createElement(react_router_dom_1.Route, { path: "/options-page", render: function (routeProps) {
+                    setIsOnHomePage(false);
+                    return react_1["default"].createElement(OptionsPage_1["default"], { userId: userId, availableJobs: availableJobs });
+                } }),
+            react_1["default"].createElement(react_router_dom_1.Route, { path: "/", render: function () {
+                    setIsOnHomePage(true);
+                    return mainPage;
+                } }))));
 }
 exports["default"] = App;
