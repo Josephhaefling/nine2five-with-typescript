@@ -16,6 +16,9 @@ interface Job {
     contactPerson: ContactPerson
     jobDate: string
     jobId: string
+    time: string
+    cost: string
+    location: Location
 }
 
 interface BathroomInfo {
@@ -28,6 +31,17 @@ interface ContactPerson {
     title: string
     first: string
     last: string
+}
+
+interface Location { 
+    city: string
+    postcode: number
+    street: Street
+}
+
+interface Street {
+    number: number
+    name: string
 }
 
 const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
@@ -44,28 +58,34 @@ const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
     const getJobObjects = () => {
         const usersJobs = getUsersJobs(availableJobs, userId)
         return usersJobs.map(job => {
-            const { businessName, bathroomInfo, breakroomInfo, contactPerson, jobId } = job
-            const { numBathrooms, toiletsPerBathroom, sinksPerBathroom} = bathroomInfo
-            const { first, last } = contactPerson
             
-            if(job.employeeId === userId ) {                
+            const { businessName, bathroomInfo, breakroomInfo, contactPerson, jobId, time, cost, location } = job
+            const { numBathrooms, toiletsPerBathroom, sinksPerBathroom} = bathroomInfo
+            const { first, last } = contactPerson    
+            const { city, postcode, street } = location     
+            const { number, name } = street   
+            
+            if(job.employeeId === userId ) {                                
                 return (
                     <Link
                         className="job-links"
-                        to={ `/${businessName}1` }
-                        style={{ textDecoration: 'none' }}
+                        to={ `/${businessName}-${jobId}` }
                         key={ jobId }
+                        style={{ textDecoration: 'none' }}
                     >
                         <section 
                             className='job-card'
-                            key={ jobId }
+                            id={jobId}
+                            // key={ jobId }
                         >
+                            <p>{ time }</p>
                             <h3>{ businessName }</h3>
+                            <h3>{number} {name}</h3>
+                            <h3>{city} {postcode}</h3>
                             <h5>{`${first} ${last}`}</h5>
-                            <p>Num Bathrooms: { numBathrooms }</p>
-                            <p>Toilets Per Bathroom: { toiletsPerBathroom }</p>
-                            <p>Sinks Per Bathroom: { sinksPerBathroom }</p>
-                            <p>Num Breakrooms: { breakroomInfo }</p>
+                            <p>{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
+                            <p>{ breakroomInfo } breakrooms.</p>
+                            <p>${ cost }</p>
                         </section>
                     </Link>
                 )

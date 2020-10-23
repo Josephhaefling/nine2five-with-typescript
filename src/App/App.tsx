@@ -38,8 +38,7 @@ function App() : JSX.Element {
   const [ jobIsStarted, setJobIsStarted ] = useState <boolean> (false)
   const [ startTime, setStartTime ] = useState <string> ('')
   const [ userId, setUseId ] = useState <number> (3)
-  const { businessList, availableJobs } = UseApp(availableJobsList) || {businessList: currentBusinessList, availableJobs: availableJobsList}
-  // console.log('app', availableJobs);
+  const { businessList, availableJobs } = availableJobsList !== undefined && UseApp(availableJobsList) || {businessList: currentBusinessList, availableJobs: availableJobsList}
   
   
   const mainPage = (
@@ -66,14 +65,21 @@ function App() : JSX.Element {
   
   return (
     
+    
     <section>
       <Header isHome={isOnHomePage} />
       <Switch>
         <Route
-          path="/:businessName"
+          path="/:businessName:jobId"
           render={(routeProps) => {            
-            const { key } = routeProps.location            
-            return <JobPage availableJobs={ availableJobsList } jobId={ key } />
+            const { key } = routeProps.location  
+            const jobId = routeProps.match.params.jobId.split("-")[1]
+            if(availableJobsList.length > 0 ) {
+              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } />
+            } else {
+              return <p>Something went wrong try again.</p>
+            }
+                      
           }}
         />
         <Route 
@@ -87,9 +93,15 @@ function App() : JSX.Element {
         <Route
           path="/"
           render={() => {
-            setIsOnHomePage(true)
-           return mainPage
-          }}
+            if(availableJobsList.length === 0) {
+              setIsOnHomePage(true)
+              return <p>It looks like you don't have any jobs today.</p>
+            } else {
+              setIsOnHomePage(true)
+              return mainPage
+            }
+            }
+          }
         / >
       </Switch>
     </section>  

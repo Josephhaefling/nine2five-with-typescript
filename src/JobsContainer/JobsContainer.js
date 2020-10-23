@@ -32,26 +32,38 @@ var JobsContainer = function (props) {
     var getJobObjects = function () {
         var usersJobs = getUsersJobs(availableJobs, userId);
         return usersJobs.map(function (job) {
-            var businessName = job.businessName, bathroomInfo = job.bathroomInfo, breakroomInfo = job.breakroomInfo, contactPerson = job.contactPerson, jobId = job.jobId;
+            var businessName = job.businessName, bathroomInfo = job.bathroomInfo, breakroomInfo = job.breakroomInfo, contactPerson = job.contactPerson, jobId = job.jobId, time = job.time, cost = job.cost, location = job.location;
             var numBathrooms = bathroomInfo.numBathrooms, toiletsPerBathroom = bathroomInfo.toiletsPerBathroom, sinksPerBathroom = bathroomInfo.sinksPerBathroom;
             var first = contactPerson.first, last = contactPerson.last;
+            var city = location.city, postcode = location.postcode, street = location.street;
+            var number = street.number, name = street.name;
             if (job.employeeId === userId) {
-                return (react_1["default"].createElement(react_router_dom_1.Link, { className: "job-links", to: "/" + businessName + "1", style: { textDecoration: 'none' }, key: jobId },
-                    react_1["default"].createElement("section", { className: 'job-card', key: jobId },
+                return (react_1["default"].createElement(react_router_dom_1.Link, { className: "job-links", to: "/" + businessName + "-" + jobId, key: jobId, style: { textDecoration: 'none' } },
+                    react_1["default"].createElement("section", { className: 'job-card', id: jobId },
+                        react_1["default"].createElement("p", null, time),
                         react_1["default"].createElement("h3", null, businessName),
+                        react_1["default"].createElement("h3", null,
+                            number,
+                            " ",
+                            name),
+                        react_1["default"].createElement("h3", null,
+                            city,
+                            " ",
+                            postcode),
                         react_1["default"].createElement("h5", null, first + " " + last),
                         react_1["default"].createElement("p", null,
-                            "Num Bathrooms: ",
-                            numBathrooms),
+                            numBathrooms,
+                            " bathrooms with ",
+                            toiletsPerBathroom,
+                            " toilets and ",
+                            sinksPerBathroom,
+                            " sinks. "),
                         react_1["default"].createElement("p", null,
-                            "Toilets Per Bathroom: ",
-                            toiletsPerBathroom),
+                            breakroomInfo,
+                            " breakrooms."),
                         react_1["default"].createElement("p", null,
-                            "Sinks Per Bathroom: ",
-                            sinksPerBathroom),
-                        react_1["default"].createElement("p", null,
-                            "Num Breakrooms: ",
-                            breakroomInfo))));
+                            "$",
+                            cost))));
             }
         });
     };

@@ -48,8 +48,7 @@ function App() {
     var _j = react_1.useState(false), jobIsStarted = _j[0], setJobIsStarted = _j[1];
     var _k = react_1.useState(''), startTime = _k[0], setStartTime = _k[1];
     var _l = react_1.useState(3), userId = _l[0], setUseId = _l[1];
-    var _m = UseApp_1["default"](availableJobsList) || { businessList: currentBusinessList, availableJobs: availableJobsList }, businessList = _m.businessList, availableJobs = _m.availableJobs;
-    // console.log('app', availableJobs);
+    var _m = availableJobsList !== undefined && UseApp_1["default"](availableJobsList) || { businessList: currentBusinessList, availableJobs: availableJobsList }, businessList = _m.businessList, availableJobs = _m.availableJobs;
     var mainPage = (react_1["default"].createElement("section", { "data-testid": "App", className: "main-page" },
         react_1["default"].createElement("main", { "data-testid": "main-page", className: "main-page" },
             react_1["default"].createElement("section", { "data-testid": "user-info-section", className: "userInfo-section" },
@@ -62,16 +61,29 @@ function App() {
     return (react_1["default"].createElement("section", null,
         react_1["default"].createElement(Header_1["default"], { isHome: isOnHomePage }),
         react_1["default"].createElement(react_router_dom_1.Switch, null,
-            react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName", render: function () {
-                    return react_1["default"].createElement(JobPage_1["default"], { currentJob: currentJob });
+            react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName:jobId", render: function (routeProps) {
+                    var key = routeProps.location.key;
+                    var jobId = routeProps.match.params.jobId.split("-")[1];
+                    if (availableJobsList.length > 0) {
+                        return react_1["default"].createElement(JobPage_1["default"], { availableJobs: availableJobsList, jobId: jobId });
+                    }
+                    else {
+                        return react_1["default"].createElement("p", null, "Something went wrong try again.");
+                    }
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/options-page", render: function (routeProps) {
                     setIsOnHomePage(false);
                     return react_1["default"].createElement(OptionsPage_1["default"], { userId: userId, availableJobs: availableJobs });
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/", render: function () {
-                    setIsOnHomePage(true);
-                    return mainPage;
+                    if (availableJobsList.length === 0) {
+                        setIsOnHomePage(true);
+                        return react_1["default"].createElement("p", null, "It looks like you don't have any jobs today.");
+                    }
+                    else {
+                        setIsOnHomePage(true);
+                        return mainPage;
+                    }
                 } }))));
 }
 exports["default"] = App;

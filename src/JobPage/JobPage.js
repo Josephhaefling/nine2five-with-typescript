@@ -5,9 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var react_1 = __importDefault(require("react"));
 var JobPage = function (props) {
-    var currentJob = props.currentJob;
+    console.log("I ran");
+    var jobId = props.jobId, availableJobs = props.availableJobs;
+    var currentJob = availableJobs && availableJobs.find(function (job) { return job.jobId === jobId; });
     console.log(currentJob);
+    var businessName = currentJob.businessName, bathroomInfo = currentJob.bathroomInfo, breakroomInfo = currentJob.breakroomInfo, contactPerson = currentJob.contactPerson, location = currentJob.location, phone = currentJob.phone, personImage = currentJob.personImage;
+    var _a = contactPerson && contactPerson, first = _a.first, last = _a.last;
+    var large = (personImage && personImage).large;
     return (react_1["default"].createElement("section", null,
-        react_1["default"].createElement("h1", null, "Hi I am the job page!")));
+        react_1["default"].createElement("img", { src: large, alt: "contact person" }),
+        react_1["default"].createElement("h3", null,
+            first,
+            " ",
+            last)));
 };
 exports["default"] = JobPage;
