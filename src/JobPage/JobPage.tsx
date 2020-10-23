@@ -1,4 +1,4 @@
-import React from "react"
+import React, { MouseEvent, SyntheticEvent } from "react"
 import "../JobPage/JobPage.css"
 import finishJob from "../assets/finish-flag.png"
 import notStarted from '../assets/stopwatch.png'
@@ -55,6 +55,10 @@ interface Props {
     availableJobs: Job[]
 }
 
+// interface EventTarget {
+//     src: string
+// }
+
 const JobPage : React.FC <jobPage> = (props) : JSX.Element => {
         console.log("I ran");
 
@@ -84,12 +88,17 @@ const JobPage : React.FC <jobPage> = (props) : JSX.Element => {
                 <p>{ breakroomInfo } breakrooms.</p>
                 <p>${ cost }</p>
                 <img 
+                    alt="start job"
                     src={notStarted} 
                     data-testid="start-job" 
-                    disabled={jobIsStarted}
+                    // disabled={jobIsStarted}
                     className="start-job-btn" 
-                    onClick={(e) => {
-                    e.target.src = started
+                    onClick={(event : SyntheticEvent) => {
+                        console.log(event.target);
+                        
+                        // const { src } = event.target  
+                                            
+                    // event.target.src = started
                 // setStartTime(moment().format("hh:mm:ss a"))
                 // setJobIsStarted(true)
                 }} />
