@@ -97,7 +97,7 @@ function App() : JSX.Element {
               setIsOnHomePage(true)
               return <p>It looks like you don't have any jobs today.</p>
             } else {
-              setIsOnHomePage(true)
+               setIsOnHomePage(true)
               return mainPage
             }
             }
