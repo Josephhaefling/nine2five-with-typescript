@@ -1,4 +1,9 @@
 import React from "react"
+import "../JobPage/JobPage.css"
+import finishJob from "../assets/finish-flag.png"
+import notStarted from '../assets/stopwatch.png'
+import jobIsStarted from "../assets/timerStarted.png"
+import started from '../assets/timerStarted.png'
 
 interface jobPage {
     availableJobs: Job[]
@@ -6,6 +11,7 @@ interface jobPage {
 }
 
 interface Job {
+    cost: number
     employeeId: number
     bathroomInfo: Bathroom
     breakroomInfo: number
@@ -56,15 +62,38 @@ const JobPage : React.FC <jobPage> = (props) : JSX.Element => {
     const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)
     console.log(currentJob);
     
-    const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage } : any = currentJob
-    const { first, last } = contactPerson && contactPerson
-    const { large } = personImage && personImage
+    const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : any = currentJob
+    const { first, last } = contactPerson
+    const { numBathrooms, toiletsPerBathroom, sinksPerBathroom } = bathroomInfo
+    const { city, postcode, street } = location
+    const { number, name } = street
+    const { large } = personImage
     
 
     return (
-        <section>
-            <img src={ large } alt="contact person" />
-            <h3>{ first } { last }</h3>
+        <section className="job-info-page">
+            <section className="current-job-card">
+                <section className="image-container">
+                    <img className="contact-image" src={ large } alt="contact person" />
+                </section>
+                <h3 className="contact-name">{ first } { last }</h3>
+                <p className="contact-name">{ phone }</p>
+                <h4 className="street-address">{ name } { number }</h4>
+                <h4 className="address">{ city }, CO { postcode  }</h4>
+                <p>{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
+                <p>{ breakroomInfo } breakrooms.</p>
+                <p>${ cost }</p>
+                <img 
+                    src={notStarted} 
+                    data-testid="start-job" 
+                    disabled={jobIsStarted}
+                    className="start-job-btn" 
+                    onClick={(e) => {
+                    e.target.src = started
+                // setStartTime(moment().format("hh:mm:ss a"))
+                // setJobIsStarted(true)
+                }} />
+            </section>
         </section>
     )
 }
