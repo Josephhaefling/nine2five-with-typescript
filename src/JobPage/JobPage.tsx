@@ -1,67 +1,10 @@
 import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
 import "../JobPage/JobPage.css"
+import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
 // import finishJob from "../assets/favorited.png"
-import * as notStarted from "../assets/stopwatch.png"
+import * as notStarted from "../home-data"
 // import jobIsStarted from "../assets/timerStarted.png"
 // import started from '../assets/timerStarted.png'
-
-interface jobPage {
-    availableJobs: Job[]
-    jobId: any
-}
-
-interface Job {
-    cost: number
-    employeeId: number
-    bathroomInfo: Bathroom
-    breakroomInfo: number
-    businessName: string
-    contactPerson: ContactPerson
-    jobDate: string
-    jobId: string
-    location: Location
-    phone: string
-    personImage: PersonImage
-}
-
-interface Bathroom {
-    numBathrooms: number
-    toiletsPerBathroom: number
-    sinksPerBathroom: number
-}
-
-interface ContactPerson {
-    first: string
-    last: string
-}
-
-interface Location {
-    city: string
-    postcode: number
-    street: Street
-}
-
-interface Street {
-    number: number
-    name: string
-}
-
-interface PersonImage {
-    large: string
-}
-
-interface Props {
-    jobId: string
-    availableJobs: Job[]
-}
-
-interface notStarted {
-  value: any;
-}
-
-declare module "*.png" {
-      export const value: any;
-}
 
 // declare namespace JSX {
 //   interface ElementAttributesProperty {

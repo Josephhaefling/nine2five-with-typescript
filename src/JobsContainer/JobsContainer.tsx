@@ -1,48 +1,8 @@
 import React, { useState, FC } from "react"
 import "../JobsContainer/JobsContainer.css"
 import { Link } from 'react-router-dom'
+import { jobsContainer, BathroomInfo, Job, ContactPerson, Location, Street } from "../home-data"
 
-
-interface jobsContainer {
-    availableJobs: Job[]
-    userId: number
-}
-
-interface Job {
-    employeeId: number
-    bathroomInfo: BathroomInfo
-    breakroomInfo: number
-    businessName: string
-    contactPerson: ContactPerson
-    jobDate: string
-    jobId: string
-    time: string
-    cost: string
-    location: Location
-}
-
-interface BathroomInfo {
-    numBathrooms: number
-    toiletsPerBathroom: number
-    sinksPerBathroom: number
-}
-
-interface ContactPerson {
-    title: string
-    first: string
-    last: string
-}
-
-interface Location { 
-    city: string
-    postcode: number
-    street: Street
-}
-
-interface Street {
-    number: number
-    name: string
-}
 
 const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
     

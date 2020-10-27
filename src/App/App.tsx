@@ -7,6 +7,7 @@ import Header from '../Header/Header'
 import OptionsPage from '../OptionsPage/OptionsPage'
 import JobsContainer from '../JobsContainer/JobsContainer'
 import JobPage from '../JobPage/JobPage'
+import { Job } from "../home-data"
 // import JobsContainer from '../JobsContainer/JobsContainer'
 // import StartJob from '../StartJob/StartJob'
 // import RateBusiness from '../RateBusiness/RateBusiness'
@@ -16,17 +17,6 @@ import JobPage from '../JobPage/JobPage'
 
 function App() : JSX.Element {
 
-  interface Job {
-    employeeId: number
-    bathroomInfo: object
-    breakRoomInfo: number
-    businessName: string
-    contactPerson: object
-    jobDate: string
-}
-
-
-  
   const [ availableJobsList, setAvailableJobsList ] = useState <any> ([])
   const [ currentJob, setCurrentJob ] = useState<object>({})
   const [ completedJobs, setCompletedJobs ] = useState <object[]> ([])
@@ -64,8 +54,6 @@ function App() : JSX.Element {
 
   
   return (
-    
-    
     <section>
       <Header isHome={isOnHomePage} />
       <Switch>
