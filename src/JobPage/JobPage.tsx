@@ -1,9 +1,9 @@
-import React, { MouseEvent, SyntheticEvent } from "react"
+import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
 import "../JobPage/JobPage.css"
-import finishJob from "../assets/finish-flag.png"
+// import finishJob from "../assets/favorited.png"
 import notStarted from '../assets/stopwatch.png'
 import jobIsStarted from "../assets/timerStarted.png"
-import started from '../assets/timerStarted.png'
+// import started from '../assets/timerStarted.png'
 
 interface jobPage {
     availableJobs: Job[]
@@ -55,11 +55,13 @@ interface Props {
     availableJobs: Job[]
 }
 
-// interface EventTarget {
-//     src: string
-// }
+declare namespace JSX {
+  interface ElementAttributesProperty {
+    disabled: { jobIsStarted: string };
+  }
+}
 
-const JobPage : React.FC <jobPage> = (props) : JSX.Element => {
+const JobPage : FC <jobPage> = (props) : JSX.Element => {
         console.log("I ran");
 
     const { jobId, availableJobs } : Props = props 
@@ -88,20 +90,20 @@ const JobPage : React.FC <jobPage> = (props) : JSX.Element => {
                 <p>{ breakroomInfo } breakrooms.</p>
                 <p>${ cost }</p>
                 <img 
-                    alt="start job"
-                    src={notStarted} 
-                    data-testid="start-job" 
-                    // disabled={jobIsStarted}
+                    alt="start job" 
+                    src={notStarted}
+                    data-testid="start-job"
+                    // disabled ={jobIsStarted} 
                     className="start-job-btn" 
-                    onClick={(event : SyntheticEvent) => {
-                        console.log(event.target);
-                        
-                        // const { src } = event.target  
+                    // onClick={(event : SyntheticEvent) => {
+                        // console.log(event.target.src);
+                        // const { src } : Attributes = event.target 
                                             
-                    // event.target.src = started
-                // setStartTime(moment().format("hh:mm:ss a"))
-                // setJobIsStarted(true)
-                }} />
+                    // event.target.src = started 
+                    // setStartTime(moment().format("hh:mm:ss a"))
+                    // setJobIsStarted(true)
+                // } 
+                />
             </section>
         </section>
     )

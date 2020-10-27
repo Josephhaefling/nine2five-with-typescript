@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var react_1 = __importDefault(require("react"));
 require("../JobPage/JobPage.css");
+// import finishJob from "../assets/favorited.png"
+var stopwatch_png_1 = __importDefault(require("../assets/stopwatch.png"));
 var JobPage = function (props) {
     console.log("I ran");
     var jobId = props.jobId, availableJobs = props.availableJobs;
@@ -45,6 +47,9 @@ var JobPage = function (props) {
                 " breakrooms."),
             react_1["default"].createElement("p", null,
                 "$",
-                cost))));
+                cost),
+            react_1["default"].createElement("img", { alt: "start job", src: stopwatch_png_1["default"], "data-testid": "start-job", 
+                // disabled ={jobIsStarted} 
+                className: "start-job-btn" }))));
 };
 exports["default"] = JobPage;
