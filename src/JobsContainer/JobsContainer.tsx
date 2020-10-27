@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, FC } from "react"
 import "../JobsContainer/JobsContainer.css"
 import { Link } from 'react-router-dom'
 
@@ -44,12 +44,12 @@ interface Street {
     name: string
 }
 
-const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
+const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
     
     const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[]> ([])
     const { availableJobs, userId, } =props
     
-    const getUsersJobs = (jobsList : object[], id : number) => {        
+    const getUsersJobs = (jobsList : object[], id : number) : Job[] => {        
         const usersJobs = availableJobs.filter((job : Job) => job.employeeId === id)  
         return usersJobs
         }
@@ -57,7 +57,7 @@ const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
 
     const getJobObjects = () => {
         const usersJobs = getUsersJobs(availableJobs, userId)
-        return usersJobs.map(job => {
+        return usersJobs.map((job) : JSX.Element | undefined => {
             
             const { businessName, bathroomInfo, breakroomInfo, contactPerson, jobId, time, cost, location } = job
             const { numBathrooms, toiletsPerBathroom, sinksPerBathroom} = bathroomInfo
@@ -76,7 +76,7 @@ const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
                         <section 
                             className='job-card'
                             id={jobId}
-                            // key={ jobId }
+                            key={ jobId }
                         >
                             <p>{ time }</p>
                             <h3>{ businessName }</h3>

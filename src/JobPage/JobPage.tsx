@@ -1,8 +1,8 @@
 import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
 import "../JobPage/JobPage.css"
 // import finishJob from "../assets/favorited.png"
-import notStarted from '../assets/stopwatch.png'
-import jobIsStarted from "../assets/timerStarted.png"
+import * as notStarted from "../assets/stopwatch.png"
+// import jobIsStarted from "../assets/timerStarted.png"
 // import started from '../assets/timerStarted.png'
 
 interface jobPage {
@@ -55,11 +55,19 @@ interface Props {
     availableJobs: Job[]
 }
 
-declare namespace JSX {
-  interface ElementAttributesProperty {
-    disabled: { jobIsStarted: string };
-  }
+interface notStarted {
+  value: any;
 }
+
+declare module "*.png" {
+      export const value: any;
+}
+
+// declare namespace JSX {
+//   interface ElementAttributesProperty {
+//     disabled: { jobIsStarted: string };
+//   }
+// }
 
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
         console.log("I ran");
@@ -91,9 +99,9 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                 <p>${ cost }</p>
                 <img 
                     alt="start job" 
-                    src={notStarted}
+                    src={ notStarted }
                     data-testid="start-job"
-                    // disabled ={jobIsStarted} 
+                    // disabled={ jobIsStarted } 
                     className="start-job-btn" 
                     // onClick={(event : SyntheticEvent) => {
                         // console.log(event.target.src);

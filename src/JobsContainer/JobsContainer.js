@@ -39,7 +39,7 @@ var JobsContainer = function (props) {
             var number = street.number, name = street.name;
             if (job.employeeId === userId) {
                 return (react_1["default"].createElement(react_router_dom_1.Link, { className: "job-links", to: "/" + businessName + "-" + jobId, key: jobId, style: { textDecoration: 'none' } },
-                    react_1["default"].createElement("section", { className: 'job-card', id: jobId },
+                    react_1["default"].createElement("section", { className: 'job-card', id: jobId, key: jobId },
                         react_1["default"].createElement("p", null, time),
                         react_1["default"].createElement("h3", null, businessName),
                         react_1["default"].createElement("h3", null,
