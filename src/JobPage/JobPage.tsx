@@ -1,17 +1,20 @@
 import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
 import "../JobPage/JobPage.css"
 import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
-import "../react-app-env.d.ts"
+const notStarted = require('../assets/stopwatch.png')
+// import "../react-app-env.d.ts"
 // import finishJob from "../assets/favorited.png"
-import notStarted from "../assets/stopwatch.png"
 // import jobIsStarted from "../assets/timerStarted.png"
 // import started from '../assets/timerStarted.png'
 
 // declare namespace JSX {
-//   interface ElementAttributesProperty {
-//     disabled: { jobIsStarted: string };
-//   }
-// }
+    //   interface ElementAttributesProperty {
+        //     disabled: { jobIsStarted: string };
+        //   }
+        // }
+        
+// import notStarted from "../assets/stopwatch.png"
+
 
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
         console.log("I ran");

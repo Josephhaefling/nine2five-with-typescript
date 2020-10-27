@@ -1,2 +1,4 @@
 /// <reference types="react-scripts" />
-declare module '*.png'
+declare module '*.png' {
+    export const value = any
+}

@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var react_1 = __importDefault(require("react"));
 require("../JobPage/JobPage.css");
-require("../react-app-env.d.ts");
+var notStarted = require('../assets/stopwatch.png');
+// import "../react-app-env.d.ts"
 // import finishJob from "../assets/favorited.png"
-var stopwatch_png_1 = __importDefault(require("../assets/stopwatch.png"));
 // import jobIsStarted from "../assets/timerStarted.png"
 // import started from '../assets/timerStarted.png'
 // declare namespace JSX {
@@ -15,6 +15,7 @@ var stopwatch_png_1 = __importDefault(require("../assets/stopwatch.png"));
 //     disabled: { jobIsStarted: string };
 //   }
 // }
+// import notStarted from "../assets/stopwatch.png"
 var JobPage = function (props) {
     console.log("I ran");
     var jobId = props.jobId, availableJobs = props.availableJobs;
@@ -56,7 +57,7 @@ var JobPage = function (props) {
             react_1["default"].createElement("p", null,
                 "$",
                 cost),
-            react_1["default"].createElement("img", { alt: "start job", src: stopwatch_png_1["default"], "data-testid": "start-job", 
+            react_1["default"].createElement("img", { alt: "start job", src: notStarted, "data-testid": "start-job", 
                 // disabled={ jobIsStarted } 
                 className: "start-job-btn" }))));
 };
