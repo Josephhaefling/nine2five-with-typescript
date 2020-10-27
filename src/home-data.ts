@@ -72,5 +72,3 @@ export interface BathroomInfo {
     toiletsPerBathroom: number
     sinksPerBathroom: number
 }
-
-export * from "./assets/stopwatch.png"

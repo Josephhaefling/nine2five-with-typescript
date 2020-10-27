@@ -25,7 +25,7 @@ exports.__esModule = true;
 var react_1 = __importDefault(require("react"));
 require("../JobPage/JobPage.css");
 // import finishJob from "../assets/favorited.png"
-var notStarted = __importStar(require("../home-data"));
+var notStarted = __importStar(require("../assets/stopwatch.png"));
 // import jobIsStarted from "../assets/timerStarted.png"
 // import started from '../assets/timerStarted.png'
 // declare namespace JSX {
