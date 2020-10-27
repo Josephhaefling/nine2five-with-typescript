@@ -1,8 +1,9 @@
 import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
 import "../JobPage/JobPage.css"
 import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
+import "../react-app-env.d.ts"
 // import finishJob from "../assets/favorited.png"
-import * as notStarted from "../assets/stopwatch.png"
+import notStarted from "../assets/stopwatch.png"
 // import jobIsStarted from "../assets/timerStarted.png"
 // import started from '../assets/timerStarted.png'
 
