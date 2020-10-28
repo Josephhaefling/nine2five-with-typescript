@@ -5,11 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var react_1 = __importDefault(require("react"));
 require("../JobPage/JobPage.css");
-var notStarted = require('../assets/stopwatch.png');
-// import "../react-app-env.d.ts"
-// import finishJob from "../assets/favorited.png"
-// import jobIsStarted from "../assets/timerStarted.png"
-// import started from '../assets/timerStarted.png'
+var finishJob = require("../assets/favorited.png");
+var jobIsStarted = require("../assets/timerStarted.png");
+var started = require("../assets/timerStarted.png");
+var notStarted = require("../assets/stopwatch.png");
 // declare namespace JSX {
 //   interface ElementAttributesProperty {
 //     disabled: { jobIsStarted: string };
@@ -17,10 +16,8 @@ var notStarted = require('../assets/stopwatch.png');
 // }
 // import notStarted from "../assets/stopwatch.png"
 var JobPage = function (props) {
-    console.log("I ran");
     var jobId = props.jobId, availableJobs = props.availableJobs;
     var currentJob = availableJobs && availableJobs.find(function (job) { return job.jobId === jobId; });
-    console.log(currentJob);
     var businessName = currentJob.businessName, bathroomInfo = currentJob.bathroomInfo, breakroomInfo = currentJob.breakroomInfo, contactPerson = currentJob.contactPerson, location = currentJob.location, phone = currentJob.phone, personImage = currentJob.personImage, cost = currentJob.cost;
     var first = contactPerson.first, last = contactPerson.last;
     var numBathrooms = bathroomInfo.numBathrooms, toiletsPerBathroom = bathroomInfo.toiletsPerBathroom, sinksPerBathroom = bathroomInfo.sinksPerBathroom;
@@ -57,8 +54,8 @@ var JobPage = function (props) {
             react_1["default"].createElement("p", null,
                 "$",
                 cost),
-            react_1["default"].createElement("img", { alt: "start job", src: notStarted, "data-testid": "start-job", 
-                // disabled={ jobIsStarted } 
-                className: "start-job-btn" }))));
+            react_1["default"].createElement("section", { className: "button-container" },
+                react_1["default"].createElement("img", { alt: "start job button", src: notStarted, disabled: jobIsStarted, className: "job-button" }),
+                react_1["default"].createElement("img", { className: "job-button", src: finishJob, alt: "finish job button" })))));
 };
 exports["default"] = JobPage;

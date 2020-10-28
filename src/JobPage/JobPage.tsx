@@ -1,11 +1,11 @@
 import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
-import "../JobPage/JobPage.css"
+import { JsxEmit } from "typescript"
 import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
-const notStarted = require('../assets/stopwatch.png')
-// import "../react-app-env.d.ts"
-// import finishJob from "../assets/favorited.png"
-// import jobIsStarted from "../assets/timerStarted.png"
-// import started from '../assets/timerStarted.png'
+import "../JobPage/JobPage.css"
+const finishJob = require("../assets/favorited.png")
+const jobIsStarted = require("../assets/timerStarted.png")
+const started = require("../assets/timerStarted.png")
+const notStarted = require("../assets/stopwatch.png")
 
 // declare namespace JSX {
     //   interface ElementAttributesProperty {
@@ -17,12 +17,8 @@ const notStarted = require('../assets/stopwatch.png')
 
 
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
-        console.log("I ran");
-
     const { jobId, availableJobs } : Props = props 
-    const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)
-    console.log(currentJob);
-    
+    const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)    
     const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : any = currentJob
     const { first, last } = contactPerson
     const { numBathrooms, toiletsPerBathroom, sinksPerBathroom } = bathroomInfo
@@ -44,21 +40,28 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                 <p>{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
                 <p>{ breakroomInfo } breakrooms.</p>
                 <p>${ cost }</p>
-                <img 
-                    alt="start job" 
-                    src={ notStarted }
-                    data-testid="start-job"
-                    // disabled={ jobIsStarted } 
-                    className="start-job-btn" 
+                <section className="button-container">
+
+                    <img 
+                        alt="start job button" 
+                        src={ notStarted }
+                        disabled={ jobIsStarted } 
+                        className="job-button" 
                     // onClick={(event : SyntheticEvent) => {
                         // console.log(event.target.src);
                         // const { src } : Attributes = event.target 
-                                            
-                    // event.target.src = started 
-                    // setStartTime(moment().format("hh:mm:ss a"))
-                    // setJobIsStarted(true)
-                // } 
-                />
+                        
+                        // event.target.src = started 
+                        // setStartTime(moment().format("hh:mm:ss a"))
+                        // setJobIsStarted(true)
+                        // } 
+                        />
+                        <img 
+                            className="job-button"
+                            src={ finishJob }
+                            alt="finish job button"
+                        />
+                </section>
             </section>
         </section>
     )

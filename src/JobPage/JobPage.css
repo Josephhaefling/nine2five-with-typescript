@@ -40,3 +40,16 @@
     margin-top: 0px;
     text-align: center;
 }
+
+.button-container {
+    align-self: center;
+    display: flex;
+    justify-content: space-around;
+    height: 10%;
+    width: 80%;
+}
+
+.job-button {
+    cursor: pointer;
+    height: 100%;
+}
