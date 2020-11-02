@@ -1,22 +1,18 @@
-import React, { Attributes, MouseEvent, SyntheticEvent, FC } from "react"
-import { JsxEmit } from "typescript"
+import React, { FC, useState } from "react"
+import { Link } from 'react-router-dom'
+import { isJsxAttribute, isJsxElement, JsxAttribute, JsxElement, JsxEmit, updateJsxAttributes } from "typescript"
 import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
 import "../JobPage/JobPage.css"
-const finishJob = require("../assets/favorited.png")
-const jobIsStarted = require("../assets/timerStarted.png")
+import moment from 'moment'
+const favorite = require("../assets/favorited.png")
+const notFavorite = require("../assets/notFavorited.png")
 const started = require("../assets/timerStarted.png")
 const notStarted = require("../assets/stopwatch.png")
 
-// declare namespace JSX {
-    //   interface ElementAttributesProperty {
-        //     disabled: { jobIsStarted: string };
-        //   }
-        // }
-        
-// import notStarted from "../assets/stopwatch.png"
-
-
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
+    const [ jobStarted, setJobStarted] = useState <boolean> (false)
+    const [ startTime, setStartTime ] = useState <string> ("")
+    const [ isFavorite, setIsFavorite ] = useState <boolean> (false)
     const { jobId, availableJobs } : Props = props 
     const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)    
     const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : any = currentJob
@@ -25,7 +21,6 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
     const { city, postcode, street } = location
     const { number, name } = street
     const { large } = personImage
-    
 
     return (
         <section className="job-info-page">
@@ -41,26 +36,33 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                 <p>{ breakroomInfo } breakrooms.</p>
                 <p>${ cost }</p>
                 <section className="button-container">
+                    <Link
+                        to={ `rate-job-form${jobId}` }
+                        key={jobId}
+                        style={{ textDecoration: 'none' }}
+                        onClick={ e => {   
+                                if(!jobStarted) {
+                                    e.preventDefault()
+                                    setJobStarted(!jobStarted) 
+                                    setStartTime(moment().format("hh:mm:ss a"))
+                                    }                        
+                                }
+                            }    
+                    >
 
-                    <img 
-                        alt="start job button" 
-                        src={ notStarted }
-                        disabled={ jobIsStarted } 
-                        className="job-button" 
-                    // onClick={(event : SyntheticEvent) => {
-                        // console.log(event.target.src);
-                        // const { src } : Attributes = event.target 
-                        
-                        // event.target.src = started 
-                        // setStartTime(moment().format("hh:mm:ss a"))
-                        // setJobIsStarted(true)
-                        // } 
+                        <img 
+                            alt="start job button" 
+                            src={ jobStarted ? started : notStarted }
+                            className="job-button" 
+                            
                         />
+                    </Link>
                         <img 
                             className="job-button"
-                            src={ finishJob }
+                            src={ isFavorite ? favorite : notFavorite }
                             alt="finish job button"
-                        />
+                            onClick={ (e) => { setIsFavorite(!isFavorite) } }
+                            />
                 </section>
             </section>
         </section>

@@ -72,3 +72,13 @@ export interface BathroomInfo {
     toiletsPerBathroom: number
     sinksPerBathroom: number
 }
+
+export interface rateJobForm {
+    
+}
+
+// export interface IntrinsicElements {
+//     src: string
+//     disabled: boolean
+// }
+
