@@ -2,14 +2,8 @@ import React from 'react'
 import { JsxElement } from 'typescript'
 import { Link } from 'react-router-dom'
 import './Header.css'
+import { IntrinsicElements, header } from "../home-data"
 
-interface IntrinsicElements {
-    [elemName: string]: any;
-}
-
-interface header {
-  isHome: boolean;
-}
 
 const Header : React.FC <header> = (props) : JSX.Element  => {
 const { isHome } = props    

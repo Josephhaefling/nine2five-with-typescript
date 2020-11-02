@@ -1,55 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, FC } from "react"
 import "../JobsContainer/JobsContainer.css"
 import { Link } from 'react-router-dom'
+import { jobsContainer, BathroomInfo, Job, ContactPerson, Location, Street } from "../home-data"
 
 
-interface jobsContainer {
-    availableJobs: Job[]
-    userId: number
-}
-
-interface Job {
-    employeeId: number
-    bathroomInfo: BathroomInfo
-    breakroomInfo: number
-    businessName: string
-    contactPerson: ContactPerson
-    jobDate: string
-    jobId: string
-    time: string
-    cost: string
-    location: Location
-}
-
-interface BathroomInfo {
-    numBathrooms: number
-    toiletsPerBathroom: number
-    sinksPerBathroom: number
-}
-
-interface ContactPerson {
-    title: string
-    first: string
-    last: string
-}
-
-interface Location { 
-    city: string
-    postcode: number
-    street: Street
-}
-
-interface Street {
-    number: number
-    name: string
-}
-
-const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
+const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
     
     const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[]> ([])
     const { availableJobs, userId, } =props
     
-    const getUsersJobs = (jobsList : object[], id : number) => {        
+    const getUsersJobs = (jobsList : object[], id : number) : Job[] => {        
         const usersJobs = availableJobs.filter((job : Job) => job.employeeId === id)  
         return usersJobs
         }
@@ -57,7 +17,7 @@ const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
 
     const getJobObjects = () => {
         const usersJobs = getUsersJobs(availableJobs, userId)
-        return usersJobs.map(job => {
+        return usersJobs.map((job) : JSX.Element | undefined => {
             
             const { businessName, bathroomInfo, breakroomInfo, contactPerson, jobId, time, cost, location } = job
             const { numBathrooms, toiletsPerBathroom, sinksPerBathroom} = bathroomInfo
@@ -76,7 +36,7 @@ const JobsContainer: React.FC <jobsContainer> = (props) : JSX.Element => {
                         <section 
                             className='job-card'
                             id={jobId}
-                            // key={ jobId }
+                            key={ jobId }
                         >
                             <p>{ time }</p>
                             <h3>{ businessName }</h3>

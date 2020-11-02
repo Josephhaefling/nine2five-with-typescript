@@ -6,7 +6,9 @@ import UseApp from '../App/UseApp'
 import Header from '../Header/Header'
 import OptionsPage from '../OptionsPage/OptionsPage'
 import JobsContainer from '../JobsContainer/JobsContainer'
+import RateJobForm from '../RateJobForm/RateJobForm'
 import JobPage from '../JobPage/JobPage'
+import { Job } from "../home-data"
 // import JobsContainer from '../JobsContainer/JobsContainer'
 // import StartJob from '../StartJob/StartJob'
 // import RateBusiness from '../RateBusiness/RateBusiness'
@@ -16,17 +18,6 @@ import JobPage from '../JobPage/JobPage'
 
 function App() : JSX.Element {
 
-  interface Job {
-    employeeId: number
-    bathroomInfo: object
-    breakRoomInfo: number
-    businessName: string
-    contactPerson: object
-    jobDate: string
-}
-
-
-  
   const [ availableJobsList, setAvailableJobsList ] = useState <any> ([])
   const [ currentJob, setCurrentJob ] = useState<object>({})
   const [ completedJobs, setCompletedJobs ] = useState <object[]> ([])
@@ -64,11 +55,19 @@ function App() : JSX.Element {
 
   
   return (
-    
-    
     <section>
       <Header isHome={isOnHomePage} />
       <Switch>
+        <Route 
+          path="/rate-job-form:jobID"
+          render={(routeProps) => {
+            console.log("routeProps:", routeProps.match.params.jobID);
+            
+          setIsOnHomePage(false)
+          return <RateJobForm />
+        }}
+        />
+
         <Route
           path="/:businessName:jobId"
           render={(routeProps) => {            
@@ -78,10 +77,10 @@ function App() : JSX.Element {
               return <JobPage availableJobs={ availableJobsList } jobId={ jobId } />
             } else {
               return <p>Something went wrong try again.</p>
-            }
-                      
+            }           
           }}
         />
+
         <Route 
           path="/options-page"
           render={(routeProps) => {
@@ -97,7 +96,7 @@ function App() : JSX.Element {
               setIsOnHomePage(true)
               return <p>It looks like you don't have any jobs today.</p>
             } else {
-              setIsOnHomePage(true)
+               setIsOnHomePage(true)
               return mainPage
             }
             }

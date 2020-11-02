@@ -1,13 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { optionsPage } from "../home-data"
 
 
-interface OptionsPage {
-    userId: number;
-    availableJobs: object[];
-}
-
-const OptionsPage : React.FC <OptionsPage> = (props) => {    
+const OptionsPage : React.FC <optionsPage> = (props) => {    
 
     return (
         <section>

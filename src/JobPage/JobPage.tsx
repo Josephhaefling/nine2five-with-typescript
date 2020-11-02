@@ -1,70 +1,70 @@
-import React from "react"
+import React, { FC, useState } from "react"
+import { Link } from 'react-router-dom'
+import { isJsxAttribute, isJsxElement, JsxAttribute, JsxElement, JsxEmit, updateJsxAttributes } from "typescript"
+import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
+import "../JobPage/JobPage.css"
+import moment from 'moment'
+const favorite = require("../assets/favorited.png")
+const notFavorite = require("../assets/notFavorited.png")
+const started = require("../assets/timerStarted.png")
+const notStarted = require("../assets/stopwatch.png")
 
-interface jobPage {
-    availableJobs: Job[]
-    jobId: any
-}
-
-interface Job {
-    employeeId: number
-    bathroomInfo: Bathroom
-    breakroomInfo: number
-    businessName: string
-    contactPerson: ContactPerson
-    jobDate: string
-    jobId: string
-    location: Location
-    phone: string
-    personImage: PersonImage
-}
-
-interface Bathroom {
-    numBathrooms: number
-    toiletsPerBathroom: number
-    sinksPerBathroom: number
-}
-
-interface ContactPerson {
-    first: string
-    last: string
-}
-
-interface Location {
-    city: string
-    postcode: number
-    street: Street
-}
-
-interface Street {
-    number: number
-    name: string
-}
-
-interface PersonImage {
-    large: string
-}
-
-interface Props {
-    jobId: string
-    availableJobs: Job[]
-}
-
-const JobPage : React.FC <jobPage> = (props) : JSX.Element => {
-        console.log("I ran");
-
+const JobPage : FC <jobPage> = (props) : JSX.Element => {
+    const [ jobStarted, setJobStarted] = useState <boolean> (false)
+    const [ startTime, setStartTime ] = useState <string> ("")
+    const [ isFavorite, setIsFavorite ] = useState <boolean> (false)
     const { jobId, availableJobs } : Props = props 
-    const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)
-    console.log(currentJob);
-    
-    const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage } : any = currentJob
-    const { first, last } = contactPerson && contactPerson
-    const { large } = personImage && personImage
-    
+    const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)    
+    const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : any = currentJob
+    const { first, last } = contactPerson
+    const { numBathrooms, toiletsPerBathroom, sinksPerBathroom } = bathroomInfo
+    const { city, postcode, street } = location
+    const { number, name } = street
+    const { large } = personImage
 
     return (
-        <section>
-            <img src={ large } alt="contact person" />
-            <h3>{ first } { last }</h3>
+        <section className="job-info-page">
+            <section className="current-job-card">
+                <section className="image-container">
+                    <img className="contact-image" src={ large } alt="contact person" />
+                </section>
+                <h3 className="contact-name">{ first } { last }</h3>
+                <p className="contact-name">{ phone }</p>
+                <h4 className="street-address">{ name } { number }</h4>
+                <h4 className="address">{ city }, CO { postcode  }</h4>
+                <p>{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
+                <p>{ breakroomInfo } breakrooms.</p>
+                <p>${ cost }</p>
+                <section className="button-container">
+                    <Link
+                        to={ `rate-job-form${jobId}` }
+                        key={jobId}
+                        style={{ textDecoration: 'none' }}
+                        onClick={ e => {   
+                                if(!jobStarted) {
+                                    e.preventDefault()
+                                    setJobStarted(!jobStarted) 
+                                    setStartTime(moment().format("hh:mm:ss a"))
+                                    }                        
+                                }
+                            }    
+                    >
+
+                        <img 
+                            alt="start job button" 
+                            src={ jobStarted ? started : notStarted }
+                            className="job-button" 
+                            
+                        />
+                    </Link>
+                        <img 
+                            className="job-button"
+                            src={ isFavorite ? favorite : notFavorite }
+                            alt="finish job button"
+                            onClick={ (e) => { setIsFavorite(!isFavorite) } }
+                            />
+                </section>
+            </section>
         </section>
     )
 }

@@ -29,6 +29,7 @@ var UseApp_1 = __importDefault(require("../App/UseApp"));
 var Header_1 = __importDefault(require("../Header/Header"));
 var OptionsPage_1 = __importDefault(require("../OptionsPage/OptionsPage"));
 var JobsContainer_1 = __importDefault(require("../JobsContainer/JobsContainer"));
+var RateJobForm_1 = __importDefault(require("../RateJobForm/RateJobForm"));
 var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
 // import JobsContainer from '../JobsContainer/JobsContainer'
 // import StartJob from '../StartJob/StartJob'
@@ -61,6 +62,11 @@ function App() {
     return (react_1["default"].createElement("section", null,
         react_1["default"].createElement(Header_1["default"], { isHome: isOnHomePage }),
         react_1["default"].createElement(react_router_dom_1.Switch, null,
+            react_1["default"].createElement(react_router_dom_1.Route, { path: "/rate-job-form:jobID", render: function (routeProps) {
+                    console.log("routeProps:", routeProps.match.params.jobID);
+                    setIsOnHomePage(false);
+                    return react_1["default"].createElement(RateJobForm_1["default"], null);
+                } }),
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName:jobId", render: function (routeProps) {
                     var key = routeProps.location.key;
                     var jobId = routeProps.match.params.jobId.split("-")[1];
