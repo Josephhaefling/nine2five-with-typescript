@@ -1,10 +1,25 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { rateJobForm } from "../home-data"
 import { Link } from 'react-router-dom'
+import "./RateJobForm.css"
 
-const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
+    const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
 
+        const [ changedTrash, setChangedTrash ] = useState <string> ("")
+        const [ changedToiletPaper, setChangedToiletPaper ] = useState <string> ("")
+        const [ refilledHandSoap, setRefilledHandSoap ] = useState <string> ("")
+        const [ refilledPaperTowls, setRefilledPaperTowls ] = useState <string> ("")
+        const [ cleanedToilets, setCleanedToilets ] = useState <string> ("")
+        const [ cleanedSinks, setCleanedSinks ] = useState <string> ("")
+        const [ easyToFind, setEasyToFind ] = useState <number> (0)
+        const [ staffWasRespectful, setStaffWasRespectful ] = useState <number> (0)
+        const [ contactPresent, setContactPresent ] = useState <string> ("")
+        const [ wouldYouDoJobAgain, setWouldYouDoJobAgain ] = useState <string> ("")
+
+
+        
     return (
+        <section className="rate-job-page">
         <form data-testid="rate-business-form">
             {/* <h1 className="name-of-business">{businessName}</h1> */}
             <label className="rate-business-questions">
@@ -13,43 +28,46 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
             <section className="question-container">
                 <label className="rate-business-btn">
                 <input
+                    className="answer"
                     type="radio"
-                    // checked={changedTrash === true}
-                    //             value='Yes'
-                    // onChange={(event) => setChangedTrash(true)}
+                    checked={changedTrash === "Yes"}
+                    value='Yes'
+                    onChange={(event) => setChangedTrash("Yes")}
                 />
                     Yes
                 </label>
                 <label className="rate-business-btn">
                 <input
+                    className="answer"
                     type="radio"
-                    // checked={changedTrash === false}
+                    checked={changedTrash === "No"}
                     value='No'
-                    // onChange={(event) => setChangedTrash(false)}
+                    onChange={(event) => setChangedTrash("No")}
                 />
                     No
                 </label>
             </section>
-            <p className="rate-business-questions">
-                Did you refill the toilet paper?</p>
+            <label className="rate-business-questions">
+                Did you refill the toilet paper?
+            </label>
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={changedToiletPaper === true}
+                        checked={changedToiletPaper === "Yes"}
                         value='Yes'
-                        // onChange={(event) => setChangedToiletPaper(true)}
+                        onChange={(event) => setChangedToiletPaper("Yes")}
                     />
                     Yes
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={changedToiletPaper === false}
+                        checked={changedToiletPaper === "No"}
                         value='No'
-                        // onChange={(event) => setChangedToiletPaper(false)}
+                        onChange={(event) => setChangedToiletPaper("No")}
                     />
                     No
                 </label>
@@ -60,21 +78,21 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
-                    className="rate-business-questions"
+                        className="answer"
                     type="radio"
-                    // checked={refilledHandSoap === true}
+                    checked={refilledHandSoap === "Yes"}
                     value='Yes'
-                    // onChange={(event) => setRefilledHandSoap(true)}
+                    onChange={(event) => setRefilledHandSoap("Yes")}
                     />
                     Yes
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={refilledHandSoap === false}
+                        checked={refilledHandSoap === "No"}
                         value='No'
-                        // onChange={(event) => setRefilledHandSoap(false)}
+                        onChange={(event) => setRefilledHandSoap("No")}
                     />
                         No
                 </label>
@@ -85,21 +103,21 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={refilledPaperTowls === true}
+                        checked={refilledPaperTowls === "Yes"}
                         value='Yes'
-                        // onChange={(event) => setRefilledPaperTowls(true)}
+                        onChange={(event) => setRefilledPaperTowls("Yes")}
                     />
                         Yes
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={refilledPaperTowls === false}
+                        checked={refilledPaperTowls === "No"}
                         value='No'
-                        // onChange={(event) => setRefilledPaperTowls(false)}
+                        onChange={(event) => setRefilledPaperTowls("No")}
                     />
                         No
                 </label>
@@ -110,21 +128,21 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={cleanedToilets === true}
+                        checked={cleanedToilets === "Yes"}
                         value='Yes'
-                        // onChange={(event) => setCleanedToilets(true)}
+                        onChange={(event) => setCleanedToilets("Yes")}
                     />
                         Yes
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={cleanedToilets === false}
+                        checked={cleanedToilets === "No"}
                         value='No'
-                        // onChange={(event) => setCleanedToilets(false)}
+                        onChange={(event) => setCleanedToilets("No")}
                     />
                         No
                 </label>
@@ -135,21 +153,21 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
+                        className="answer"
                         type="radio"
-                        className="rate-business-questions"
-                        // checked={cleanedSinks === true}
+                        checked={cleanedSinks === "Yes"}
                         value='Yes'
-                        // onChange={(event) => setCleanedSinks(true)}
+                        onChange={(event) => setCleanedSinks("Yes")}
                     />    
                         Yes
                 </label>
                 <label className="rate-business-btn">
                     <input
+                        className="answer"
                         type="radio"
-                        className="rate-business-questions"
-                        // checked={cleanedSinks === false}
+                        checked={cleanedSinks === "No"}
                         value='No'
-                        // onChange={(event) => setCleanedSinks(false)}
+                        onChange={(event) => setCleanedSinks("No")}
                     />
                         No
                 </label>
@@ -160,153 +178,156 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={easyToFind === 1}
+                        checked={easyToFind === 1}
                         value='1'
-                        // onChange={(event) => setEasyToFind(1)}
+                        onChange={(event) => setEasyToFind(1)}
                     />
                         1
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={easyToFind === 2}
+                        checked={easyToFind === 2}
                         value='2'
-                        // onChange={(event) => setEasyToFind(2)}
+                        onChange={(event) => setEasyToFind(2)}
                 />    
                     2   
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={easyToFind === 3}
+                        checked={easyToFind === 3}
                         value='3'
-                        // onChange={(event) => setEasyToFind(3)}
+                        onChange={(event) => setEasyToFind(3)}
                 />
                     3   
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={easyToFind === 4}
+                        checked={easyToFind === 4}
                         value='4'
-                        // onChange={(event) => setEasyToFind(4)}
+                        onChange={(event) => setEasyToFind(4)}
                 />
                     4
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={easyToFind === 5}
+                        checked={easyToFind === 5}
                         value='5'
-                        // onChange={(event) => setEasyToFind(5)}
+                        onChange={(event) => setEasyToFind(5)}
                 />
                     5
                 </label>
             </section>
-            <p className="rate-business-questions">
-                Was staff respectful?</p>
+            <label className="rate-business-questions">
+                Was staff respectful?
+            </label>
             <section className="question-container">
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={staffWasRespectful === 1}
+                        checked={staffWasRespectful === 1}
                         value='1'
-                        // onChange={(event) => setStaffWasRespectful(1)}
+                        onChange={(event) => setStaffWasRespectful(1)}
                     />
                           1
                 </label>
                 <label className="rate-business-btn">
                     <input
-                    className="rate-business-questions"
+                        className="answer"
                     type="radio"
-                    // checked={staffWasRespectful === 2}
+                    checked={staffWasRespectful === 2}
                     value='2'
-                    // onChange={(event) => setStaffWasRespectful(2)}
+                    onChange={(event) => setStaffWasRespectful(2)}
                 />
                       2
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={staffWasRespectful === 3}
+                        checked={staffWasRespectful === 3}
                         value='3'
-                        // onChange={(event) => setStaffWasRespectful(3)}
+                        onChange={(event) => setStaffWasRespectful(3)}
                 />
                       3
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={staffWasRespectful === 4}
+                        checked={staffWasRespectful === 4}
                         value='4'
-                        // onChange={(event) => setStaffWasRespectful(4)}
+                        onChange={(event) => setStaffWasRespectful(4)}
                 />
                       4
                 </label>
                 <label className="rate-business-btn">
                     <input
-                        className="rate-business-questions"
+                        className="answer"
                         type="radio"
-                        // checked={staffWasRespectful === 5}
+                        checked={staffWasRespectful === 5}
                         value='5'
-                        // onChange={(event) => setStaffWasRespectful(5)}
+                        onChange={(event) => setStaffWasRespectful(5)}
                 />
                       5
             </label>
         </section>
-        <p className="rate-business-questions">
-            Was contact person present?</p>
+        <label className="rate-business-questions">
+            Was contact person present?
+        </label>
         <section>
             <label className="rate-business-btn">
                 <input
-                    className="rate-business-questions"
+                    className="answer"
                     type="radio"
-                    // checked={contactPresent === true}
+                    checked={contactPresent === "Yes"}
                     value='Yes'
-                    // onChange={(event) => setContactPresent(true)}
+                    onChange={(event) => setContactPresent("Yes")}
                 />
                     Yes
             </label>
             <label className="rate-business-btn">
                 <input
-                    className="rate-business-questions"
+                    className="answer"
                     type="radio"
-                    // checked={contactPresent === false}
+                    checked={contactPresent === "No"}
                     value='No'
-                    // onChange={(event) => setContactPresent(false)}
+                    onChange={(event) => setContactPresent("No")}
                 />
                     No
             </label>
         </section>
-        <p className="rate-business-questions">
-            Would you like to do this job again?</p>
+        <label className="rate-business-questions">
+            Would you like to do this job again?
+        </label>
         <section className="question-container">
         <label className="rate-business-btn">
             <input
-                className="rate-business-questions"
+                className="answer"
                 type="radio"
-                // checked={wouldYouDoJobAgain === true}
+                checked={wouldYouDoJobAgain === "Yes"}
                 value='Yes'
-                // onChange={(event) => setWouldYouDoJobAgain(true)}
+                onChange={(event) => setWouldYouDoJobAgain("Yes")}
             />
                 Yes
         </label>
         <label className="rate-business-btn">
             <input
-                className="rate-business-questions"
+                className="answer"
                 type="radio"
-                // checked={wouldYouDoJobAgain === false}
+                checked={wouldYouDoJobAgain === "No"}
                 value='No'
-                // onChange={(event) => setWouldYouDoJobAgain(false)}
+                onChange={(event) => setWouldYouDoJobAgain("No")}
             />
                 No
         </label>
@@ -330,6 +351,7 @@ const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
         </button>
       </Link>
   </form>
+  </section>
     )
 }
 
