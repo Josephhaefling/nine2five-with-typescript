@@ -5,6 +5,7 @@ import { jobsContainer, BathroomInfo, Job, ContactPerson, Location, Street } fro
 
 
 const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
+    console.log(props);
     
     const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[]> ([])
     const { availableJobs, userId, } =props
@@ -32,6 +33,7 @@ const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
                         to={ `/${businessName}-${jobId}` }
                         key={ jobId }
                         style={{ textDecoration: 'none' }}
+                        onClick={(e) => props.setCurrentJob(job)}
                     >
                         <section 
                             className='job-card'

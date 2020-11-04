@@ -8,7 +8,7 @@ import OptionsPage from '../OptionsPage/OptionsPage'
 import JobsContainer from '../JobsContainer/JobsContainer'
 import RateJobForm from '../RateJobForm/RateJobForm'
 import JobPage from '../JobPage/JobPage'
-import { Job } from "../home-data"
+import { Job, noJobSelected } from "../home-data"
 // import JobsContainer from '../JobsContainer/JobsContainer'
 // import StartJob from '../StartJob/StartJob'
 // import RateBusiness from '../RateBusiness/RateBusiness'
@@ -18,8 +18,23 @@ import { Job } from "../home-data"
 
 function App() : JSX.Element {
 
+  const NoJobSelected : noJobSelected = {
+    cost: "",
+    employeeId: 0,
+    bathroomInfo: { numBathrooms: 0, toiletsPerBathroom: 0, sinksPerBathroom: 0 },
+    breakroomInfo: 0,
+    businessName: "",
+    contactPerson: { last: "", first: ""},
+    jobDate: "",
+    jobId: "",
+    location: { city: "", postcode: 0, street: { number: 0, name: ""}},
+    phone: "",
+    personImage: { large: ""},
+    time: ""
+}
+
   const [ availableJobsList, setAvailableJobsList ] = useState <any> ([])
-  const [ currentJob, setCurrentJob ] = useState<object>({})
+  const [ currentJob, setCurrentJob ] = useState <Job | noJobSelected>  (NoJobSelected)
   const [ completedJobs, setCompletedJobs ] = useState <object[]> ([])
   const [ currentBusinessList, setBusinessList ] = useState <object[]> ([])
   const [ endTime, setEndTime ] = useState <string> ('')
@@ -41,6 +56,7 @@ function App() : JSX.Element {
           <JobsContainer 
             availableJobs={ availableJobsList } 
             userId={ userId }
+            setCurrentJob={ setCurrentJob }
           /> 
       </main>
     </section>
@@ -61,10 +77,10 @@ function App() : JSX.Element {
         <Route 
           path="/rate-job-form:jobID"
           render={(routeProps) => {
-            console.log("routeProps:", routeProps.match.params.jobID);
+            console.log("routeProps:", routeProps.match.params.businessName);
             
           setIsOnHomePage(false)
-          return <RateJobForm />
+          return <RateJobForm  />
         }}
         />
 
@@ -74,7 +90,7 @@ function App() : JSX.Element {
             const { key } = routeProps.location  
             const jobId = routeProps.match.params.jobId.split("-")[1]
             if(availableJobsList.length > 0 ) {
-              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } />
+              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } currentJob={ currentJob }/>
             } else {
               return <p>Something went wrong try again.</p>
             }           

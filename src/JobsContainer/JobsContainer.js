@@ -23,6 +23,7 @@ var react_1 = __importStar(require("react"));
 require("../JobsContainer/JobsContainer.css");
 var react_router_dom_1 = require("react-router-dom");
 var JobsContainer = function (props) {
+    console.log(props);
     var _a = react_1.useState([]), currentUsersJobs = _a[0], setCurrentUsersJobs = _a[1];
     var availableJobs = props.availableJobs, userId = props.userId;
     var getUsersJobs = function (jobsList, id) {
@@ -38,7 +39,7 @@ var JobsContainer = function (props) {
             var city = location.city, postcode = location.postcode, street = location.street;
             var number = street.number, name = street.name;
             if (job.employeeId === userId) {
-                return (react_1["default"].createElement(react_router_dom_1.Link, { className: "job-links", to: "/" + businessName + "-" + jobId, key: jobId, style: { textDecoration: 'none' } },
+                return (react_1["default"].createElement(react_router_dom_1.Link, { className: "job-links", to: "/" + businessName + "-" + jobId, key: jobId, style: { textDecoration: 'none' }, onClick: function (e) { return props.setCurrentJob(job); } },
                     react_1["default"].createElement("section", { className: 'job-card', id: jobId, key: jobId },
                         react_1["default"].createElement("p", null, time),
                         react_1["default"].createElement("h3", null, businessName),

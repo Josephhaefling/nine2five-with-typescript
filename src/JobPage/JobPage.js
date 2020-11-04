@@ -34,8 +34,8 @@ var JobPage = function (props) {
     var _a = react_1.useState(false), jobStarted = _a[0], setJobStarted = _a[1];
     var _b = react_1.useState(""), startTime = _b[0], setStartTime = _b[1];
     var _c = react_1.useState(false), isFavorite = _c[0], setIsFavorite = _c[1];
-    var jobId = props.jobId, availableJobs = props.availableJobs;
-    var currentJob = availableJobs && availableJobs.find(function (job) { return job.jobId === jobId; });
+    var jobId = props.jobId, availableJobs = props.availableJobs, currentJob = props.currentJob;
+    // const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)    
     var businessName = currentJob.businessName, bathroomInfo = currentJob.bathroomInfo, breakroomInfo = currentJob.breakroomInfo, contactPerson = currentJob.contactPerson, location = currentJob.location, phone = currentJob.phone, personImage = currentJob.personImage, cost = currentJob.cost;
     var first = contactPerson.first, last = contactPerson.last;
     var numBathrooms = bathroomInfo.numBathrooms, toiletsPerBathroom = bathroomInfo.toiletsPerBathroom, sinksPerBathroom = bathroomInfo.sinksPerBathroom;

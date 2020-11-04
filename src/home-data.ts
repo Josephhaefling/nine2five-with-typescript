@@ -19,6 +19,21 @@ export interface Job {
     time: string
 }
 
+export interface noJobSelected {
+    cost: string
+    employeeId: number
+    bathroomInfo: Bathroom
+    breakroomInfo: number
+    businessName: string
+    contactPerson: ContactPerson
+    jobDate: string
+    jobId: string
+    location: Location
+    phone: string
+    personImage: PersonImage
+    time: string
+}
+
 export interface ContactPerson {
     first: string
     last: string
@@ -42,11 +57,13 @@ export interface PersonImage {
 export interface Props {
     jobId: string
     availableJobs: Job[]
+    currentJob: Job | noJobSelected
 }
 
 export interface jobPage {
     availableJobs: Job[]
     jobId: any
+    currentJob: Job | noJobSelected
 }
 
 export interface IntrinsicElements {
@@ -65,6 +82,7 @@ export interface optionsPage {
 export interface jobsContainer {
     availableJobs: Job[]
     userId: number
+    setCurrentJob: Function
 }
 
 export interface BathroomInfo {

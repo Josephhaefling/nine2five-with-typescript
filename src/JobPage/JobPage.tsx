@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react"
 import { Link } from 'react-router-dom'
 import { isJsxAttribute, isJsxElement, JsxAttribute, JsxElement, JsxEmit, updateJsxAttributes } from "typescript"
-import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage } from "../home-data"
+import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage, noJobSelected } from "../home-data"
 import "../JobPage/JobPage.css"
 import moment from 'moment'
 const favorite = require("../assets/favorited.png")
@@ -10,13 +10,15 @@ const started = require("../assets/timerStarted.png")
 const notStarted = require("../assets/stopwatch.png")
 
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
+    
+    
     const [ jobStarted, setJobStarted] = useState <boolean> (false)
     const [ startTime, setStartTime ] = useState <string> ("")
     const [ isFavorite, setIsFavorite ] = useState <boolean> (false)
-    const { jobId, availableJobs } : Props = props 
-    const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)    
-    const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : any = currentJob
-    const { first, last } = contactPerson
+    const { jobId, availableJobs, currentJob } : Props = props 
+    const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : Job | noJobSelected = currentJob 
+    
+    const { first, last } = contactPerson 
     const { numBathrooms, toiletsPerBathroom, sinksPerBathroom } = bathroomInfo
     const { city, postcode, street } = location
     const { number, name } = street
@@ -44,7 +46,7 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                                 if(!jobStarted) {
                                     e.preventDefault()
                                     setJobStarted(!jobStarted) 
-                                    setStartTime(moment().format("hh:mm:ss a"))
+                                    setStartTime(moment().format("hh:mm:ss a"))                                    
                                     }                        
                                 }
                             }    

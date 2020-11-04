@@ -16,6 +16,18 @@ import "./RateJobForm.css"
         const [ contactPresent, setContactPresent ] = useState <string> ("")
         const [ wouldYouDoJobAgain, setWouldYouDoJobAgain ] = useState <string> ("")
 
+        // Is current job being passed in? If not get it in here!!!!!!!!
+        // const jobToRemove = availableJobsList && availableJobsList.find(availableJob => availableJob && availableJob.jobId === jobId)
+        // const newJobsList = availableJobsList.filter(availableJob => availableJob && availableJob.jobId !== jobToRemove.jobId)
+
+        // const addToCompletedJobs = () => {
+            // if(jobToRemove) {
+                // setCompletedJobs([...completedJobs, jobToRemove])
+            // }
+        // }
+
+        // useEffect(() => addToCompletedJobs(), completedJobs)
+
 
         
     return (

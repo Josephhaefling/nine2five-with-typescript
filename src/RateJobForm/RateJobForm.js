@@ -33,6 +33,14 @@ var RateJobForm = function () {
     var _h = react_1.useState(0), staffWasRespectful = _h[0], setStaffWasRespectful = _h[1];
     var _j = react_1.useState(""), contactPresent = _j[0], setContactPresent = _j[1];
     var _k = react_1.useState(""), wouldYouDoJobAgain = _k[0], setWouldYouDoJobAgain = _k[1];
+    // const jobToRemove = availableJobsList && availableJobsList.find(availableJob => availableJob && availableJob.jobId === jobId)
+    // const newJobsList = availableJobsList.filter(availableJob => availableJob && availableJob.jobId !== jobToRemove.jobId)
+    // const addToCompletedJobs = () => {
+    // if(jobToRemove) {
+    // setCompletedJobs([...completedJobs, jobToRemove])
+    // }
+    // }
+    // useEffect(() => addToCompletedJobs(), completedJobs)
     return (react_1["default"].createElement("section", { className: "rate-job-page" },
         react_1["default"].createElement("form", { "data-testid": "rate-business-form" },
             react_1["default"].createElement("label", { className: "rate-business-questions" }, "Did you change the trash?"),
