@@ -9,12 +9,6 @@ import JobsContainer from '../JobsContainer/JobsContainer'
 import RateJobForm from '../RateJobForm/RateJobForm'
 import JobPage from '../JobPage/JobPage'
 import { Job, noJobSelected } from "../home-data"
-// import JobsContainer from '../JobsContainer/JobsContainer'
-// import StartJob from '../StartJob/StartJob'
-// import RateBusiness from '../RateBusiness/RateBusiness'
-// import Options from '../Options/Options'
-// import CompletedJobs from '../CompletedJobs/CompletedJobs'
-// import Favorites from '../Favorites/Favorites'
 
 function App() : JSX.Element {
 
@@ -38,7 +32,7 @@ function App() : JSX.Element {
   const [ completedJobs, setCompletedJobs ] = useState <object[]> ([])
   const [ currentBusinessList, setBusinessList ] = useState <object[]> ([])
   const [ endTime, setEndTime ] = useState <string> ('')
-  const [ favoriteJobs, setFavoriteJobs ] = useState <object[]> ([])
+  const [ favoriteJobs, setFavoriteJobs ] = useState <Job[] | []> ([])
   const [ isOnHomePage, setIsOnHomePage ] = useState <boolean> (true)
   const [ jobIsComplete, setJobIsComplete ] = useState <boolean> (false)
   const [ jobIsStarted, setJobIsStarted ] = useState <boolean> (false)
@@ -80,7 +74,7 @@ function App() : JSX.Element {
             console.log("routeProps:", routeProps.match.params.businessName);
             
           setIsOnHomePage(false)
-          return <RateJobForm  />
+          return <RateJobForm currentJob={ currentJob } setCurrentJob={ setCurrentJob } setFavoriteJobs={ setFavoriteJobs } setCompletedJobs={ setCompletedJobs } />
         }}
         />
 
@@ -90,7 +84,7 @@ function App() : JSX.Element {
             const { key } = routeProps.location  
             const jobId = routeProps.match.params.jobId.split("-")[1]
             if(availableJobsList.length > 0 ) {
-              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } currentJob={ currentJob }/>
+              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } currentJob={ currentJob } favoriteJobs={ favoriteJobs } setFavoriteJobs={ setFavoriteJobs } />
             } else {
               return <p>Something went wrong try again.</p>
             }           

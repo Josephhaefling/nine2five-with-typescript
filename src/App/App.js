@@ -31,12 +31,6 @@ var OptionsPage_1 = __importDefault(require("../OptionsPage/OptionsPage"));
 var JobsContainer_1 = __importDefault(require("../JobsContainer/JobsContainer"));
 var RateJobForm_1 = __importDefault(require("../RateJobForm/RateJobForm"));
 var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
-// import JobsContainer from '../JobsContainer/JobsContainer'
-// import StartJob from '../StartJob/StartJob'
-// import RateBusiness from '../RateBusiness/RateBusiness'
-// import Options from '../Options/Options'
-// import CompletedJobs from '../CompletedJobs/CompletedJobs'
-// import Favorites from '../Favorites/Favorites'
 function App() {
     var NoJobSelected = {
         cost: "",
@@ -79,13 +73,13 @@ function App() {
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/rate-job-form:jobID", render: function (routeProps) {
                     console.log("routeProps:", routeProps.match.params.businessName);
                     setIsOnHomePage(false);
-                    return react_1["default"].createElement(RateJobForm_1["default"], null);
+                    return react_1["default"].createElement(RateJobForm_1["default"], { currentJob: currentJob, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs });
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName:jobId", render: function (routeProps) {
                     var key = routeProps.location.key;
                     var jobId = routeProps.match.params.jobId.split("-")[1];
                     if (availableJobsList.length > 0) {
-                        return react_1["default"].createElement(JobPage_1["default"], { availableJobs: availableJobsList, jobId: jobId, currentJob: currentJob });
+                        return react_1["default"].createElement(JobPage_1["default"], { availableJobs: availableJobsList, jobId: jobId, currentJob: currentJob, favoriteJobs: favoriteJobs, setFavoriteJobs: setFavoriteJobs });
                     }
                     else {
                         return react_1["default"].createElement("p", null, "Something went wrong try again.");

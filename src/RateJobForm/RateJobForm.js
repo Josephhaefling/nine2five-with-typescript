@@ -22,7 +22,21 @@ exports.__esModule = true;
 var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
 require("./RateJobForm.css");
-var RateJobForm = function () {
+var RateJobForm = function (props) {
+    var NoJobSelected = {
+        cost: "",
+        employeeId: 0,
+        bathroomInfo: { numBathrooms: 0, toiletsPerBathroom: 0, sinksPerBathroom: 0 },
+        breakroomInfo: 0,
+        businessName: "",
+        contactPerson: { last: "", first: "" },
+        jobDate: "",
+        jobId: "",
+        location: { city: "", postcode: 0, street: { number: 0, name: "" } },
+        phone: "",
+        personImage: { large: "" },
+        time: ""
+    };
     var _a = react_1.useState(""), changedTrash = _a[0], setChangedTrash = _a[1];
     var _b = react_1.useState(""), changedToiletPaper = _b[0], setChangedToiletPaper = _b[1];
     var _c = react_1.useState(""), refilledHandSoap = _c[0], setRefilledHandSoap = _c[1];
@@ -33,6 +47,7 @@ var RateJobForm = function () {
     var _h = react_1.useState(0), staffWasRespectful = _h[0], setStaffWasRespectful = _h[1];
     var _j = react_1.useState(""), contactPresent = _j[0], setContactPresent = _j[1];
     var _k = react_1.useState(""), wouldYouDoJobAgain = _k[0], setWouldYouDoJobAgain = _k[1];
+    // Is current job being passed in? If not get it in here!!!!!!!!
     // const jobToRemove = availableJobsList && availableJobsList.find(availableJob => availableJob && availableJob.jobId === jobId)
     // const newJobsList = availableJobsList.filter(availableJob => availableJob && availableJob.jobId !== jobToRemove.jobId)
     // const addToCompletedJobs = () => {
@@ -142,6 +157,13 @@ var RateJobForm = function () {
                     react_1["default"].createElement("input", { className: "answer", type: "radio", checked: wouldYouDoJobAgain === "No", value: 'No', onChange: function (event) { return setWouldYouDoJobAgain("No"); } }),
                     "No")),
             react_1["default"].createElement(react_router_dom_1.Link, { to: '/', "aria-label": "submit rating btn", "data-testid": "submit-link", style: { textDecoration: 'none' } },
-                react_1["default"].createElement("button", { "data-testid": "submit-btn", className: "submit-business-rating" }, "Submit")))));
+                react_1["default"].createElement("button", { "data-testid": "submit-btn", className: "submit-business-rating", onClick: function () {
+                        props.setCurrentJob(NoJobSelected);
+                        props.setCompletedJobs(props.currentJob);
+                        wouldYouDoJobAgain === "Yes" && props.setFavoriteJobs();
+                        // wouldYouDoJobAgain && setFavoriteJobs([...favoriteJobs, props.currentJob])
+                        // setCurrentJob('')
+                        // setAvailableJobs(newJobsList)}
+                    } }, "Submit")))));
 };
 exports["default"] = RateJobForm;

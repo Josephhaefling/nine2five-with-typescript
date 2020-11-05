@@ -18,6 +18,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,14 +35,13 @@ require("../JobPage/JobPage.css");
 var moment_1 = __importDefault(require("moment"));
 var favorite = require("../assets/favorited.png");
 var notFavorite = require("../assets/notFavorited.png");
-var started = require("../assets/timerStarted.png");
+var started = require("../assets/finish-flag.png");
 var notStarted = require("../assets/stopwatch.png");
 var JobPage = function (props) {
     var _a = react_1.useState(false), jobStarted = _a[0], setJobStarted = _a[1];
     var _b = react_1.useState(""), startTime = _b[0], setStartTime = _b[1];
     var _c = react_1.useState(false), isFavorite = _c[0], setIsFavorite = _c[1];
     var jobId = props.jobId, availableJobs = props.availableJobs, currentJob = props.currentJob;
-    // const currentJob = availableJobs && availableJobs.find(job => job.jobId === jobId)    
     var businessName = currentJob.businessName, bathroomInfo = currentJob.bathroomInfo, breakroomInfo = currentJob.breakroomInfo, contactPerson = currentJob.contactPerson, location = currentJob.location, phone = currentJob.phone, personImage = currentJob.personImage, cost = currentJob.cost;
     var first = contactPerson.first, last = contactPerson.last;
     var numBathrooms = bathroomInfo.numBathrooms, toiletsPerBathroom = bathroomInfo.toiletsPerBathroom, sinksPerBathroom = bathroomInfo.sinksPerBathroom;
@@ -81,6 +87,10 @@ var JobPage = function (props) {
                         }
                     } },
                     react_1["default"].createElement("img", { alt: "start job button", src: jobStarted ? started : notStarted, className: "job-button" })),
-                react_1["default"].createElement("img", { className: "job-button", src: isFavorite ? favorite : notFavorite, alt: "finish job button", onClick: function (e) { setIsFavorite(!isFavorite); } })))));
+                react_1["default"].createElement("img", { className: "job-button", src: isFavorite ? favorite : notFavorite, alt: "finish job button", onClick: function (e) {
+                        var newFavorites = isFavorite && props.favoriteJobs.filter(function (job) { return job.jobId !== currentJob.jobId; });
+                        isFavorite ? setIsFavorite(!isFavorite) : setIsFavorite(!isFavorite);
+                        isFavorite ? props.setFavoriteJobs(newFavorites) : props.setFavoriteJobs(__spreadArrays(props.favoriteJobs, [currentJob]));
+                    } })))));
 };
 exports["default"] = JobPage;

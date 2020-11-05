@@ -4,9 +4,10 @@ import { isJsxAttribute, isJsxElement, JsxAttribute, JsxElement, JsxEmit, update
 import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage, noJobSelected } from "../home-data"
 import "../JobPage/JobPage.css"
 import moment from 'moment'
+
 const favorite = require("../assets/favorited.png")
 const notFavorite = require("../assets/notFavorited.png")
-const started = require("../assets/timerStarted.png")
+const started = require("../assets/finish-flag.png")
 const notStarted = require("../assets/stopwatch.png")
 
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
@@ -47,7 +48,7 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                                     e.preventDefault()
                                     setJobStarted(!jobStarted) 
                                     setStartTime(moment().format("hh:mm:ss a"))                                    
-                                    }                        
+                                    } 
                                 }
                             }    
                     >
@@ -63,7 +64,12 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                             className="job-button"
                             src={ isFavorite ? favorite : notFavorite }
                             alt="finish job button"
-                            onClick={ (e) => { setIsFavorite(!isFavorite) } }
+                            onClick={ (e) => { 
+                                const newFavorites = isFavorite && props.favoriteJobs.filter((job : Job) => job.jobId !== currentJob.jobId)
+                                isFavorite ? setIsFavorite(!isFavorite) : setIsFavorite(!isFavorite)
+                                isFavorite ?  props.setFavoriteJobs(newFavorites): props.setFavoriteJobs([...props.favoriteJobs, currentJob])
+                            }
+                         }
                             />
                 </section>
             </section>

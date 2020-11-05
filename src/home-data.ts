@@ -63,7 +63,9 @@ export interface Props {
 export interface jobPage {
     availableJobs: Job[]
     jobId: any
+    favoriteJobs: Job[] | []
     currentJob: Job | noJobSelected
+    setFavoriteJobs: Function
 }
 
 export interface IntrinsicElements {
@@ -92,7 +94,10 @@ export interface BathroomInfo {
 }
 
 export interface rateJobForm {
-    
+    currentJob: Job | noJobSelected
+    setCurrentJob: Function
+    setFavoriteJobs: Function
+    setCompletedJobs: Function
 }
 
 // export interface IntrinsicElements {

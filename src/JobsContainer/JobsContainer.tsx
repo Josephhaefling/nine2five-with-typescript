@@ -5,7 +5,6 @@ import { jobsContainer, BathroomInfo, Job, ContactPerson, Location, Street } fro
 
 
 const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
-    console.log(props);
     
     const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[]> ([])
     const { availableJobs, userId, } =props

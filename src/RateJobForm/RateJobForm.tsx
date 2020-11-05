@@ -1,10 +1,24 @@
 import React, { FC, useState } from "react"
-import { rateJobForm } from "../home-data"
+import { rateJobForm, noJobSelected } from "../home-data"
 import { Link } from 'react-router-dom'
 import "./RateJobForm.css"
+import { isPropertySignature } from "typescript"
 
-    const RateJobForm : FC <rateJobForm> = () : JSX.Element => {
-
+    const RateJobForm : FC <rateJobForm> = (props) : JSX.Element => {
+        const NoJobSelected : noJobSelected = {
+            cost: "",
+            employeeId: 0,
+            bathroomInfo: { numBathrooms: 0, toiletsPerBathroom: 0, sinksPerBathroom: 0 },
+            breakroomInfo: 0,
+            businessName: "",
+            contactPerson: { last: "", first: ""},
+            jobDate: "",
+            jobId: "",
+            location: { city: "", postcode: 0, street: { number: 0, name: ""}},
+            phone: "",
+            personImage: { large: ""},
+            time: ""
+        }
         const [ changedTrash, setChangedTrash ] = useState <string> ("")
         const [ changedToiletPaper, setChangedToiletPaper ] = useState <string> ("")
         const [ refilledHandSoap, setRefilledHandSoap ] = useState <string> ("")
@@ -353,11 +367,15 @@ import "./RateJobForm.css"
         <button
           data-testid="submit-btn"
           className="submit-business-rating"
-        //   onClick={() => {
+          onClick={() => {
+              props.setCurrentJob(NoJobSelected)
+              props.setCompletedJobs(props.currentJob)
+              wouldYouDoJobAgain === "Yes" && props.setFavoriteJobs()
             // wouldYouDoJobAgain && setFavoriteJobs([...favoriteJobs, props.currentJob])
             // setCurrentJob('')
             // setAvailableJobs(newJobsList)}
-        //   }
+            }
+        }
         >
             Submit
         </button>
