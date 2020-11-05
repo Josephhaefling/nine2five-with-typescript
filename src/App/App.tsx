@@ -8,30 +8,44 @@ import OptionsPage from '../OptionsPage/OptionsPage'
 import JobsContainer from '../JobsContainer/JobsContainer'
 import RateJobForm from '../RateJobForm/RateJobForm'
 import JobPage from '../JobPage/JobPage'
-import { Job } from "../home-data"
-// import JobsContainer from '../JobsContainer/JobsContainer'
-// import StartJob from '../StartJob/StartJob'
-// import RateBusiness from '../RateBusiness/RateBusiness'
-// import Options from '../Options/Options'
-// import CompletedJobs from '../CompletedJobs/CompletedJobs'
-// import Favorites from '../Favorites/Favorites'
+import { Job, noJobSelected } from "../home-data"
 
 function App() : JSX.Element {
 
+  const NoJobSelected : noJobSelected = {
+    cost: "",
+    employeeId: 0,
+    bathroomInfo: { numBathrooms: 0, toiletsPerBathroom: 0, sinksPerBathroom: 0 },
+    breakroomInfo: 0,
+    businessName: "",
+    contactPerson: { last: "", first: ""},
+    jobDate: "",
+    jobId: "",
+    location: { city: "", postcode: 0, street: { number: 0, name: ""}},
+    phone: "",
+    personImage: { large: ""},
+    time: ""
+}
+
   const [ availableJobsList, setAvailableJobsList ] = useState <any> ([])
-  const [ currentJob, setCurrentJob ] = useState<object>({})
+  const [ currentJob, setCurrentJob ] = useState <Job | noJobSelected>  (NoJobSelected)
   const [ completedJobs, setCompletedJobs ] = useState <object[]> ([])
   const [ currentBusinessList, setBusinessList ] = useState <object[]> ([])
   const [ endTime, setEndTime ] = useState <string> ('')
-  const [ favoriteJobs, setFavoriteJobs ] = useState <object[]> ([])
+  const [ favoriteJobs, setFavoriteJobs ] = useState <Job[] | []> ([])
   const [ isOnHomePage, setIsOnHomePage ] = useState <boolean> (true)
   const [ jobIsComplete, setJobIsComplete ] = useState <boolean> (false)
   const [ jobIsStarted, setJobIsStarted ] = useState <boolean> (false)
   const [ startTime, setStartTime ] = useState <string> ('')
   const [ userId, setUseId ] = useState <number> (3)
   const { businessList, availableJobs } = availableJobsList !== undefined && UseApp(availableJobsList) || {businessList: currentBusinessList, availableJobs: availableJobsList}
+  const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[] | []> ([])
   
-  
+  const getUsersJobs = () : Job[] => {                
+        const usersJobs = availableJobsList.filter((job : Job) => job.employeeId === userId) 
+        return usersJobs
+      }  
+
   const mainPage = (
     <section data-testid="App" className="main-page">
       <main data-testid="main-page" className="main-page">
@@ -41,6 +55,8 @@ function App() : JSX.Element {
           <JobsContainer 
             availableJobs={ availableJobsList } 
             userId={ userId }
+            setCurrentJob={ setCurrentJob }
+            currentUserJobs={ currentUsersJobs }
           /> 
       </main>
     </section>
@@ -49,7 +65,9 @@ function App() : JSX.Element {
   useEffect(() => {            
     setBusinessList(businessList)
     setAvailableJobsList(availableJobs)
-  },[availableJobs, businessList])
+    const usersJobs = getUsersJobs()  
+    setCurrentUsersJobs(usersJobs)        
+  },[availableJobs, businessList, availableJobsList])
 
   
 
@@ -60,11 +78,9 @@ function App() : JSX.Element {
       <Switch>
         <Route 
           path="/rate-job-form:jobID"
-          render={(routeProps) => {
-            console.log("routeProps:", routeProps.match.params.jobID);
-            
+          render={(routeProps) => {            
           setIsOnHomePage(false)
-          return <RateJobForm />
+          return <RateJobForm currentJob={ currentJob } currentUsersJobs={ currentUsersJobs } favoriteJobs={ favoriteJobs } setCurrentJob={ setCurrentJob } setFavoriteJobs={ setFavoriteJobs } setCompletedJobs={ setCompletedJobs } setCurrentUsersJobs={setCurrentUsersJobs}/>
         }}
         />
 
@@ -74,7 +90,7 @@ function App() : JSX.Element {
             const { key } = routeProps.location  
             const jobId = routeProps.match.params.jobId.split("-")[1]
             if(availableJobsList.length > 0 ) {
-              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } />
+              return <JobPage availableJobs={ availableJobsList } jobId={ jobId } currentJob={ currentJob } favoriteJobs={ favoriteJobs } setFavoriteJobs={ setFavoriteJobs } />
             } else {
               return <p>Something went wrong try again.</p>
             }           
