@@ -34,3 +34,7 @@ form {
 .rate-business-btn {
     font-size: small;
 }
+
+h1 {
+    margin-bottom: 0;
+}

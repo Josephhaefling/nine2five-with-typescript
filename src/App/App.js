@@ -58,22 +58,28 @@ function App() {
     var _k = react_1.useState(''), startTime = _k[0], setStartTime = _k[1];
     var _l = react_1.useState(3), userId = _l[0], setUseId = _l[1];
     var _m = availableJobsList !== undefined && UseApp_1["default"](availableJobsList) || { businessList: currentBusinessList, availableJobs: availableJobsList }, businessList = _m.businessList, availableJobs = _m.availableJobs;
+    var _o = react_1.useState([]), currentUsersJobs = _o[0], setCurrentUsersJobs = _o[1];
+    var getUsersJobs = function () {
+        var usersJobs = availableJobsList.filter(function (job) { return job.employeeId === userId; });
+        return usersJobs;
+    };
     var mainPage = (react_1["default"].createElement("section", { "data-testid": "App", className: "main-page" },
         react_1["default"].createElement("main", { "data-testid": "main-page", className: "main-page" },
             react_1["default"].createElement("section", { "data-testid": "user-info-section", className: "userInfo-section" },
                 react_1["default"].createElement("h3", { "data-testid": "user-greeting", className: "user-greeting" }, "Welcome Back, Michael!")),
-            react_1["default"].createElement(JobsContainer_1["default"], { availableJobs: availableJobsList, userId: userId, setCurrentJob: setCurrentJob }))));
+            react_1["default"].createElement(JobsContainer_1["default"], { availableJobs: availableJobsList, userId: userId, setCurrentJob: setCurrentJob, currentUserJobs: currentUsersJobs }))));
     react_1.useEffect(function () {
         setBusinessList(businessList);
         setAvailableJobsList(availableJobs);
-    }, [availableJobs, businessList]);
+        var usersJobs = getUsersJobs();
+        setCurrentUsersJobs(usersJobs);
+    }, [availableJobs, businessList, availableJobsList]);
     return (react_1["default"].createElement("section", null,
         react_1["default"].createElement(Header_1["default"], { isHome: isOnHomePage }),
         react_1["default"].createElement(react_router_dom_1.Switch, null,
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/rate-job-form:jobID", render: function (routeProps) {
-                    console.log("routeProps:", routeProps.match.params.businessName);
                     setIsOnHomePage(false);
-                    return react_1["default"].createElement(RateJobForm_1["default"], { currentJob: currentJob, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs });
+                    return react_1["default"].createElement(RateJobForm_1["default"], { currentJob: currentJob, currentUsersJobs: currentUsersJobs, favoriteJobs: favoriteJobs, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs, setCurrentUsersJobs: setCurrentUsersJobs });
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName:jobId", render: function (routeProps) {
                     var key = routeProps.location.key;

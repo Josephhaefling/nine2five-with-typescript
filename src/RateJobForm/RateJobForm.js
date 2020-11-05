@@ -18,11 +18,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
 require("./RateJobForm.css");
 var RateJobForm = function (props) {
+    console.log("Rate Job Props:", props);
     var NoJobSelected = {
         cost: "",
         employeeId: 0,
@@ -47,17 +55,9 @@ var RateJobForm = function (props) {
     var _h = react_1.useState(0), staffWasRespectful = _h[0], setStaffWasRespectful = _h[1];
     var _j = react_1.useState(""), contactPresent = _j[0], setContactPresent = _j[1];
     var _k = react_1.useState(""), wouldYouDoJobAgain = _k[0], setWouldYouDoJobAgain = _k[1];
-    // Is current job being passed in? If not get it in here!!!!!!!!
-    // const jobToRemove = availableJobsList && availableJobsList.find(availableJob => availableJob && availableJob.jobId === jobId)
-    // const newJobsList = availableJobsList.filter(availableJob => availableJob && availableJob.jobId !== jobToRemove.jobId)
-    // const addToCompletedJobs = () => {
-    // if(jobToRemove) {
-    // setCompletedJobs([...completedJobs, jobToRemove])
-    // }
-    // }
-    // useEffect(() => addToCompletedJobs(), completedJobs)
     return (react_1["default"].createElement("section", { className: "rate-job-page" },
         react_1["default"].createElement("form", { "data-testid": "rate-business-form" },
+            react_1["default"].createElement("h1", { className: "name-of-business" }, props.currentJob.businessName),
             react_1["default"].createElement("label", { className: "rate-business-questions" }, "Did you change the trash?"),
             react_1["default"].createElement("section", { className: "question-container" },
                 react_1["default"].createElement("label", { className: "rate-business-btn" },
@@ -160,10 +160,12 @@ var RateJobForm = function (props) {
                 react_1["default"].createElement("button", { "data-testid": "submit-btn", className: "submit-business-rating", onClick: function () {
                         props.setCurrentJob(NoJobSelected);
                         props.setCompletedJobs(props.currentJob);
-                        wouldYouDoJobAgain === "Yes" && props.setFavoriteJobs();
-                        // wouldYouDoJobAgain && setFavoriteJobs([...favoriteJobs, props.currentJob])
-                        // setCurrentJob('')
-                        // setAvailableJobs(newJobsList)}
+                        var newUsersJobsList = props.currentUsersJobs.filter(function (job) { return job.jobId !== props.currentJob.jobId; });
+                        props.setCurrentUsersJobs(newUsersJobsList);
+                        if (wouldYouDoJobAgain === "Yes") {
+                            props.favoriteJobs.length > 0 ? props.setFavoriteJobs(__spreadArrays(props.favoriteJobs, [props.currentJob])) : props.setFavoriteJobs([props.currentJob]);
+                        }
+                        // wouldYouDoJobAgain  && setFavoriteJobs([...favoriteJobs, props.currentJob])
                     } }, "Submit")))));
 };
 exports["default"] = RateJobForm;

@@ -2,22 +2,14 @@ import React, { useState, FC } from "react"
 import "../JobsContainer/JobsContainer.css"
 import { Link } from 'react-router-dom'
 import { jobsContainer, BathroomInfo, Job, ContactPerson, Location, Street } from "../home-data"
+import { JsxEmit } from "typescript"
 
 
 const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
-    
-    const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[]> ([])
-    const { availableJobs, userId, } =props
-    
-    const getUsersJobs = (jobsList : object[], id : number) : Job[] => {        
-        const usersJobs = availableJobs.filter((job : Job) => job.employeeId === id)  
-        return usersJobs
-        }
-    
-
-    const getJobObjects = () => {
-        const usersJobs = getUsersJobs(availableJobs, userId)
-        return usersJobs.map((job) : JSX.Element | undefined => {
+        
+    const getJobObjects = (currentUserJobs : Job[]) => {
+        
+        return currentUserJobs.map((job : Job) => {
             
             const { businessName, bathroomInfo, breakroomInfo, contactPerson, jobId, time, cost, location } = job
             const { numBathrooms, toiletsPerBathroom, sinksPerBathroom} = bathroomInfo
@@ -25,7 +17,6 @@ const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
             const { city, postcode, street } = location     
             const { number, name } = street   
             
-            if(job.employeeId === userId ) {                                
                 return (
                     <Link
                         className="job-links"
@@ -50,11 +41,10 @@ const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
                         </section>
                     </Link>
                 )
-            }
         })
     }
 
-    const jobs = getJobObjects()
+    const jobs = getJobObjects(props.currentUserJobs)
     
 
     return (

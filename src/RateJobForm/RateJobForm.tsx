@@ -1,10 +1,11 @@
 import React, { FC, useState } from "react"
-import { rateJobForm, noJobSelected } from "../home-data"
+import { rateJobForm, noJobSelected, Job } from "../home-data"
 import { Link } from 'react-router-dom'
 import "./RateJobForm.css"
-import { isPropertySignature } from "typescript"
 
     const RateJobForm : FC <rateJobForm> = (props) : JSX.Element => {
+        console.log("Rate Job Props:", props);
+        
         const NoJobSelected : noJobSelected = {
             cost: "",
             employeeId: 0,
@@ -30,24 +31,10 @@ import { isPropertySignature } from "typescript"
         const [ contactPresent, setContactPresent ] = useState <string> ("")
         const [ wouldYouDoJobAgain, setWouldYouDoJobAgain ] = useState <string> ("")
 
-        // Is current job being passed in? If not get it in here!!!!!!!!
-        // const jobToRemove = availableJobsList && availableJobsList.find(availableJob => availableJob && availableJob.jobId === jobId)
-        // const newJobsList = availableJobsList.filter(availableJob => availableJob && availableJob.jobId !== jobToRemove.jobId)
-
-        // const addToCompletedJobs = () => {
-            // if(jobToRemove) {
-                // setCompletedJobs([...completedJobs, jobToRemove])
-            // }
-        // }
-
-        // useEffect(() => addToCompletedJobs(), completedJobs)
-
-
-        
     return (
         <section className="rate-job-page">
         <form data-testid="rate-business-form">
-            {/* <h1 className="name-of-business">{businessName}</h1> */}
+            <h1 className="name-of-business">{props.currentJob.businessName}</h1>
             <label className="rate-business-questions">
                 Did you change the trash?
             </label>
@@ -370,10 +357,12 @@ import { isPropertySignature } from "typescript"
           onClick={() => {
               props.setCurrentJob(NoJobSelected)
               props.setCompletedJobs(props.currentJob)
-              wouldYouDoJobAgain === "Yes" && props.setFavoriteJobs()
-            // wouldYouDoJobAgain && setFavoriteJobs([...favoriteJobs, props.currentJob])
-            // setCurrentJob('')
-            // setAvailableJobs(newJobsList)}
+              const newUsersJobsList = props.currentUsersJobs.filter((job : Job) => job.jobId !== props.currentJob.jobId)
+              props.setCurrentUsersJobs(newUsersJobsList);
+              if(wouldYouDoJobAgain === "Yes") {
+                props.favoriteJobs.length > 0 ? props.setFavoriteJobs([...props.favoriteJobs, props.currentJob]) : props.setFavoriteJobs([props.currentJob])
+              } 
+            // wouldYouDoJobAgain  && setFavoriteJobs([...favoriteJobs, props.currentJob])
             }
         }
         >

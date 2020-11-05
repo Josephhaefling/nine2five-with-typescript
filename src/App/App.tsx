@@ -39,8 +39,13 @@ function App() : JSX.Element {
   const [ startTime, setStartTime ] = useState <string> ('')
   const [ userId, setUseId ] = useState <number> (3)
   const { businessList, availableJobs } = availableJobsList !== undefined && UseApp(availableJobsList) || {businessList: currentBusinessList, availableJobs: availableJobsList}
+  const [ currentUsersJobs, setCurrentUsersJobs ] = useState <Job[] | []> ([])
   
-  
+  const getUsersJobs = () : Job[] => {                
+        const usersJobs = availableJobsList.filter((job : Job) => job.employeeId === userId) 
+        return usersJobs
+      }  
+
   const mainPage = (
     <section data-testid="App" className="main-page">
       <main data-testid="main-page" className="main-page">
@@ -51,6 +56,7 @@ function App() : JSX.Element {
             availableJobs={ availableJobsList } 
             userId={ userId }
             setCurrentJob={ setCurrentJob }
+            currentUserJobs={ currentUsersJobs }
           /> 
       </main>
     </section>
@@ -59,7 +65,9 @@ function App() : JSX.Element {
   useEffect(() => {            
     setBusinessList(businessList)
     setAvailableJobsList(availableJobs)
-  },[availableJobs, businessList])
+    const usersJobs = getUsersJobs()  
+    setCurrentUsersJobs(usersJobs)        
+  },[availableJobs, businessList, availableJobsList])
 
   
 
@@ -70,11 +78,9 @@ function App() : JSX.Element {
       <Switch>
         <Route 
           path="/rate-job-form:jobID"
-          render={(routeProps) => {
-            console.log("routeProps:", routeProps.match.params.businessName);
-            
+          render={(routeProps) => {            
           setIsOnHomePage(false)
-          return <RateJobForm currentJob={ currentJob } setCurrentJob={ setCurrentJob } setFavoriteJobs={ setFavoriteJobs } setCompletedJobs={ setCompletedJobs } />
+          return <RateJobForm currentJob={ currentJob } currentUsersJobs={ currentUsersJobs } favoriteJobs={ favoriteJobs } setCurrentJob={ setCurrentJob } setFavoriteJobs={ setFavoriteJobs } setCompletedJobs={ setCompletedJobs } setCurrentUsersJobs={setCurrentUsersJobs}/>
         }}
         />
 

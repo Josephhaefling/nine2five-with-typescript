@@ -16,7 +16,7 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
     const [ jobStarted, setJobStarted] = useState <boolean> (false)
     const [ startTime, setStartTime ] = useState <string> ("")
     const [ isFavorite, setIsFavorite ] = useState <boolean> (false)
-    const { jobId, availableJobs, currentJob } : Props = props 
+    const { availableJobs, jobId, currentJob, favoriteJobs, setFavoriteJobs } : Props = props 
     const { businessName, bathroomInfo, breakroomInfo, contactPerson, location, phone, personImage, cost } : Job | noJobSelected = currentJob 
     
     const { first, last } = contactPerson 
