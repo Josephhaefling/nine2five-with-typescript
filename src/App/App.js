@@ -31,6 +31,8 @@ var OptionsPage_1 = __importDefault(require("../OptionsPage/OptionsPage"));
 var JobsContainer_1 = __importDefault(require("../JobsContainer/JobsContainer"));
 var RateJobForm_1 = __importDefault(require("../RateJobForm/RateJobForm"));
 var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
+var FavoriteJobsPage_1 = __importDefault(require("../FavoriteJobsPage/FavoriteJobsPage"));
+var CompletedJobPage_1 = __importDefault(require("../CompletedJobsPage/CompletedJobPage"));
 function App() {
     var NoJobSelected = {
         cost: "",
@@ -77,11 +79,17 @@ function App() {
     return (react_1["default"].createElement("section", null,
         react_1["default"].createElement(Header_1["default"], { isHome: isOnHomePage }),
         react_1["default"].createElement(react_router_dom_1.Switch, null,
-            react_1["default"].createElement(react_router_dom_1.Route, { path: "/rate-job-form:jobID", render: function (routeProps) {
+            react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/options-page", render: function (routeProps) {
                     setIsOnHomePage(false);
-                    return react_1["default"].createElement(RateJobForm_1["default"], { currentJob: currentJob, currentUsersJobs: currentUsersJobs, favoriteJobs: favoriteJobs, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs, setCurrentUsersJobs: setCurrentUsersJobs });
+                    return react_1["default"].createElement(OptionsPage_1["default"], { userId: userId, availableJobs: availableJobs });
                 } }),
-            react_1["default"].createElement(react_router_dom_1.Route, { path: "/:businessName:jobId", render: function (routeProps) {
+            react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/rate-job-form:jobID", render: function (routeProps) {
+                    setIsOnHomePage(false);
+                    return react_1["default"].createElement(RateJobForm_1["default"], { completedJobs: completedJobs, currentJob: currentJob, currentUsersJobs: currentUsersJobs, favoriteJobs: favoriteJobs, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs, setCurrentUsersJobs: setCurrentUsersJobs });
+                } }),
+            react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/favorite-jobs", render: function () { return react_1["default"].createElement(FavoriteJobsPage_1["default"], { favoriteJobs: favoriteJobs }); } }),
+            react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/completed-jobs", render: function () { return react_1["default"].createElement(CompletedJobPage_1["default"], { completedJobs: completedJobs }); } }),
+            react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/:businessName:jobId", render: function (routeProps) {
                     var key = routeProps.location.key;
                     var jobId = routeProps.match.params.jobId.split("-")[1];
                     if (availableJobsList.length > 0) {
@@ -90,10 +98,6 @@ function App() {
                     else {
                         return react_1["default"].createElement("p", null, "Something went wrong try again.");
                     }
-                } }),
-            react_1["default"].createElement(react_router_dom_1.Route, { path: "/options-page", render: function (routeProps) {
-                    setIsOnHomePage(false);
-                    return react_1["default"].createElement(OptionsPage_1["default"], { userId: userId, availableJobs: availableJobs });
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { path: "/", render: function () {
                     if (availableJobsList.length === 0) {
