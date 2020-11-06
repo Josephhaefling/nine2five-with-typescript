@@ -8,6 +8,7 @@ import OptionsPage from '../OptionsPage/OptionsPage'
 import JobsContainer from '../JobsContainer/JobsContainer'
 import RateJobForm from '../RateJobForm/RateJobForm'
 import JobPage from '../JobPage/JobPage'
+import FavoriteJobsPage from '../FavoriteJobsPage/FavoriteJobsPage'
 import { Job, noJobSelected } from "../home-data"
 
 function App() : JSX.Element {
@@ -77,15 +78,28 @@ function App() : JSX.Element {
       <Header isHome={isOnHomePage} />
       <Switch>
         <Route 
-          path="/rate-job-form:jobID"
+          exact path="/options-page"
+          render={(routeProps) => {
+          setIsOnHomePage(false)
+          return <OptionsPage userId={ userId } availableJobs={ availableJobs } />
+        }}
+        />
+        
+        <Route 
+          exact path="/rate-job-form:jobID"
           render={(routeProps) => {            
           setIsOnHomePage(false)
           return <RateJobForm currentJob={ currentJob } currentUsersJobs={ currentUsersJobs } favoriteJobs={ favoriteJobs } setCurrentJob={ setCurrentJob } setFavoriteJobs={ setFavoriteJobs } setCompletedJobs={ setCompletedJobs } setCurrentUsersJobs={setCurrentUsersJobs}/>
         }}
         />
 
+        <Route 
+          exact path="/favorite-jobs"
+          render={() => <FavoriteJobsPage favoriteJobs={ favoriteJobs } />}
+        />
+
         <Route
-          path="/:businessName:jobId"
+          exact path="/:businessName:jobId"
           render={(routeProps) => {            
             const { key } = routeProps.location  
             const jobId = routeProps.match.params.jobId.split("-")[1]
@@ -95,14 +109,6 @@ function App() : JSX.Element {
               return <p>Something went wrong try again.</p>
             }           
           }}
-        />
-
-        <Route 
-          path="/options-page"
-          render={(routeProps) => {
-          setIsOnHomePage(false)
-          return <OptionsPage userId={ userId } availableJobs={ availableJobs } />
-        }}
         />
 
         <Route

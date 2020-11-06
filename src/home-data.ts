@@ -78,7 +78,6 @@ export interface jobPage {
     favoriteJobs: Job[] | []
     setFavoriteJobs: Function
 }
-// availableJobs={ availableJobsList } jobId={ jobId } favoriteJobs={ favoriteJobs } currentJob={ currentJob } setFavoriteJobs
 
 export interface IntrinsicElements {
     [elemName: string]: any;
@@ -116,8 +115,7 @@ export interface rateJobForm {
     setCurrentUsersJobs: Function
 }
 
-// export interface IntrinsicElements {
-//     src: string
-//     disabled: boolean
-// }
+export interface favoriteJobsPage {
+    favoriteJobs: Job[] | []
+}
 
