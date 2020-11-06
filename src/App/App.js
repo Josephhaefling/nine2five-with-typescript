@@ -32,6 +32,7 @@ var JobsContainer_1 = __importDefault(require("../JobsContainer/JobsContainer"))
 var RateJobForm_1 = __importDefault(require("../RateJobForm/RateJobForm"));
 var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
 var FavoriteJobsPage_1 = __importDefault(require("../FavoriteJobsPage/FavoriteJobsPage"));
+var CompletedJobPage_1 = __importDefault(require("../CompletedJobsPage/CompletedJobPage"));
 function App() {
     var NoJobSelected = {
         cost: "",
@@ -84,9 +85,10 @@ function App() {
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/rate-job-form:jobID", render: function (routeProps) {
                     setIsOnHomePage(false);
-                    return react_1["default"].createElement(RateJobForm_1["default"], { currentJob: currentJob, currentUsersJobs: currentUsersJobs, favoriteJobs: favoriteJobs, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs, setCurrentUsersJobs: setCurrentUsersJobs });
+                    return react_1["default"].createElement(RateJobForm_1["default"], { completedJobs: completedJobs, currentJob: currentJob, currentUsersJobs: currentUsersJobs, favoriteJobs: favoriteJobs, setCurrentJob: setCurrentJob, setFavoriteJobs: setFavoriteJobs, setCompletedJobs: setCompletedJobs, setCurrentUsersJobs: setCurrentUsersJobs });
                 } }),
             react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/favorite-jobs", render: function () { return react_1["default"].createElement(FavoriteJobsPage_1["default"], { favoriteJobs: favoriteJobs }); } }),
+            react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/completed-jobs", render: function () { return react_1["default"].createElement(CompletedJobPage_1["default"], { completedJobs: completedJobs }); } }),
             react_1["default"].createElement(react_router_dom_1.Route, { exact: true, path: "/:businessName:jobId", render: function (routeProps) {
                     var key = routeProps.location.key;
                     var jobId = routeProps.match.params.jobId.split("-")[1];

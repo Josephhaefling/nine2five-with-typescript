@@ -30,7 +30,6 @@ var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
 require("./RateJobForm.css");
 var RateJobForm = function (props) {
-    console.log("Rate Job Props:", props);
     var NoJobSelected = {
         cost: "",
         employeeId: 0,
@@ -156,16 +155,16 @@ var RateJobForm = function (props) {
                 react_1["default"].createElement("label", { className: "rate-business-btn" },
                     react_1["default"].createElement("input", { className: "answer", type: "radio", checked: wouldYouDoJobAgain === "No", value: 'No', onChange: function (event) { return setWouldYouDoJobAgain("No"); } }),
                     "No")),
-            react_1["default"].createElement(react_router_dom_1.Link, { to: '/', "aria-label": "submit rating btn", "data-testid": "submit-link", style: { textDecoration: 'none' } },
-                react_1["default"].createElement("button", { "data-testid": "submit-btn", className: "submit-business-rating", onClick: function () {
-                        props.setCurrentJob(NoJobSelected);
-                        props.setCompletedJobs(props.currentJob);
-                        var newUsersJobsList = props.currentUsersJobs.filter(function (job) { return job.jobId !== props.currentJob.jobId; });
-                        props.setCurrentUsersJobs(newUsersJobsList);
-                        if (wouldYouDoJobAgain === "Yes") {
-                            props.favoriteJobs.length > 0 ? props.setFavoriteJobs(__spreadArrays(props.favoriteJobs, [props.currentJob])) : props.setFavoriteJobs([props.currentJob]);
-                        }
-                        // wouldYouDoJobAgain  && setFavoriteJobs([...favoriteJobs, props.currentJob])
-                    } }, "Submit")))));
+            react_1["default"].createElement(react_router_dom_1.Link, { to: '/', "aria-label": "submit rating btn", "data-testid": "submit-link", style: { textDecoration: 'none' }, onClick: function () {
+                    props.setCurrentJob(NoJobSelected);
+                    props.setCompletedJobs.length > 0 ? props.setCompletedJobs(__spreadArrays(props.completedJobs, [props.currentJob])) : props.setCompletedJobs([props.currentJob]);
+                    var newUsersJobsList = props.currentUsersJobs.filter(function (job) { return job.jobId !== props.currentJob.jobId; });
+                    props.setCurrentUsersJobs(newUsersJobsList);
+                    if (wouldYouDoJobAgain === "Yes") {
+                        props.favoriteJobs.length > 0 ? props.setFavoriteJobs(__spreadArrays(props.favoriteJobs, [props.currentJob])) : props.setFavoriteJobs([props.currentJob]);
+                    }
+                    // wouldYouDoJobAgain  && setFavoriteJobs([...favoriteJobs, props.currentJob])
+                } },
+                react_1["default"].createElement("button", { "data-testid": "submit-btn", className: "submit-business-rating" }, "Submit")))));
 };
 exports["default"] = RateJobForm;

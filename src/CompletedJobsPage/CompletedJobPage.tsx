@@ -1,10 +1,13 @@
 import React, { FC } from "react"
-import { favoriteJobsPage, Job } from "../home-data"
+import { completedJobPage, Job } from "../home-data"
 
-const FavoriteJobsPage : FC <favoriteJobsPage> = (props) : JSX.Element => {    
+const CompletedJobPage : FC <completedJobPage> = (props) : JSX.Element => { 
+    console.log("props", props.completedJobs);
+       
     
-    const getFavorites = (favoriteJobs : Job[]) => {
-        return favoriteJobs.length > 0 && favoriteJobs.map((job : Job) => {
+    const getCompletedJobs = (completedJobs : Job[]) => {
+        
+        return completedJobs.length > 0 && completedJobs.map((job : Job) => {
             const { businessName, bathroomInfo, breakroomInfo, contactPerson, jobId, time, cost, location } = job
             const { numBathrooms, toiletsPerBathroom, sinksPerBathroom} = bathroomInfo
             const { first, last } = contactPerson    
@@ -15,7 +18,7 @@ const FavoriteJobsPage : FC <favoriteJobsPage> = (props) : JSX.Element => {
                 className='job-card'
                 id={jobId}
                 key={ jobId }
-                >
+            >
                 <p>{ time }</p>
                 <h3>{ businessName }</h3>
                 <h3>{ number } { name }</h3>
@@ -28,11 +31,13 @@ const FavoriteJobsPage : FC <favoriteJobsPage> = (props) : JSX.Element => {
         )
     })
 }      
-    const favoriteJobsXML = getFavorites(props.favoriteJobs)
+    const completedJobsXML = getCompletedJobs(props.completedJobs)
+    console.log("completed jobs XML:", completedJobsXML);
+    
 
-    return (
-        <section>{ favoriteJobsXML }</section>
+    return (    
+        <section>{ completedJobsXML }</section>
     )
 }
 
-export default FavoriteJobsPage
+export default CompletedJobPage

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import "./RateJobForm.css"
 
     const RateJobForm : FC <rateJobForm> = (props) : JSX.Element => {
-        console.log("Rate Job Props:", props);
         
         const NoJobSelected : noJobSelected = {
             cost: "",
@@ -350,13 +349,9 @@ import "./RateJobForm.css"
         aria-label="submit rating btn"
         data-testid="submit-link"
         style={{ textDecoration: 'none' }}
-      >
-        <button
-          data-testid="submit-btn"
-          className="submit-business-rating"
-          onClick={() => {
+        onClick={() => {
               props.setCurrentJob(NoJobSelected)
-              props.setCompletedJobs(props.currentJob)
+              props.setCompletedJobs.length > 0 ? props.setCompletedJobs([...props.completedJobs, props.currentJob]) : props.setCompletedJobs([props.currentJob])
               const newUsersJobsList = props.currentUsersJobs.filter((job : Job) => job.jobId !== props.currentJob.jobId)
               props.setCurrentUsersJobs(newUsersJobsList);
               if(wouldYouDoJobAgain === "Yes") {
@@ -365,6 +360,10 @@ import "./RateJobForm.css"
             // wouldYouDoJobAgain  && setFavoriteJobs([...favoriteJobs, props.currentJob])
             }
         }
+      >
+        <button
+          data-testid="submit-btn"
+          className="submit-business-rating"
         >
             Submit
         </button>

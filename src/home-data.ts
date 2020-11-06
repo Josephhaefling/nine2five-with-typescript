@@ -106,6 +106,7 @@ export interface BathroomInfo {
 }
 
 export interface rateJobForm {
+    completedJobs: Job[] | []
     currentJob: Job | noJobSelected
     currentUsersJobs: Job[] | []
     favoriteJobs: Job[] | []
@@ -117,5 +118,9 @@ export interface rateJobForm {
 
 export interface favoriteJobsPage {
     favoriteJobs: Job[] | []
+}
+
+export interface completedJobPage {
+    completedJobs: Job[] | []
 }
 

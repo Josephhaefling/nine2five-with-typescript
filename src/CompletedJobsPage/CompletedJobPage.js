@@ -4,9 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var react_1 = __importDefault(require("react"));
-var FavoriteJobsPage = function (props) {
-    var getFavorites = function (favoriteJobs) {
-        return favoriteJobs.length > 0 && favoriteJobs.map(function (job) {
+var CompletedJobPage = function (props) {
+    console.log("props", props.completedJobs);
+    var getCompletedJobs = function (completedJobs) {
+        return completedJobs.length > 0 && completedJobs.map(function (job) {
             var businessName = job.businessName, bathroomInfo = job.bathroomInfo, breakroomInfo = job.breakroomInfo, contactPerson = job.contactPerson, jobId = job.jobId, time = job.time, cost = job.cost, location = job.location;
             var numBathrooms = bathroomInfo.numBathrooms, toiletsPerBathroom = bathroomInfo.toiletsPerBathroom, sinksPerBathroom = bathroomInfo.sinksPerBathroom;
             var first = contactPerson.first, last = contactPerson.last;
@@ -39,7 +40,8 @@ var FavoriteJobsPage = function (props) {
                     cost)));
         });
     };
-    var favoriteJobsXML = getFavorites(props.favoriteJobs);
-    return (react_1["default"].createElement("section", null, favoriteJobsXML));
+    var completedJobsXML = getCompletedJobs(props.completedJobs);
+    console.log("completed jobs XML:", completedJobsXML);
+    return (react_1["default"].createElement("section", null, completedJobsXML));
 };
-exports["default"] = FavoriteJobsPage;
+exports["default"] = CompletedJobPage;
