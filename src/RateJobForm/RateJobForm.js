@@ -140,7 +140,7 @@ var RateJobForm = function (props) {
                     react_1["default"].createElement("input", { className: "answer", type: "radio", checked: staffWasRespectful === 5, value: '5', onChange: function (event) { return setStaffWasRespectful(5); } }),
                     "5")),
             react_1["default"].createElement("label", { className: "rate-business-questions" }, "Was contact person present?"),
-            react_1["default"].createElement("section", null,
+            react_1["default"].createElement("section", { className: "question-container" },
                 react_1["default"].createElement("label", { className: "rate-business-btn" },
                     react_1["default"].createElement("input", { className: "answer", type: "radio", checked: contactPresent === "Yes", value: 'Yes', onChange: function (event) { return setContactPresent("Yes"); } }),
                     "Yes"),

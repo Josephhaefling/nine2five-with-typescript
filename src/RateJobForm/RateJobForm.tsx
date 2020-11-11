@@ -297,7 +297,7 @@ import "./RateJobForm.css"
         <label className="rate-business-questions">
             Was contact person present?
         </label>
-        <section>
+        <section className="question-container">
             <label className="rate-business-btn">
                 <input
                     className="answer"
