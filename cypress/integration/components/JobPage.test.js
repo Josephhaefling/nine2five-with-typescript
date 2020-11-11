@@ -1,67 +1,29 @@
-import React from "react"
-import { mount } from 'cypress-react-unit-test';
-import JobPageElement from "../../../src/JobPage/JobPage"
-
 describe("JobPage", () => {
-    let availableJobsList = [{
-        jobId: "3",
-        businessName: "Joe's Bar n Grill", 
-        bathroomInfo: { numBathrooms: 1, toiletsPerBathroom: 1, sinksPerBathroom: 1 },
-        breakroomInfo: 1,
-        contactPerson: { firstName: "Karen", lastName: "McNormy" },
-        location: { city: "Denver", postCode: "80229", steet: {number: 1, street: "Some St"} },
-        phone: "555-555-5555", 
-        personImage: "url",
-        cost: 40
-    }]
-    let jobId = "3"
-    let currentJob = {
-        jobId: 3,
-        businessName: "Joe's Bar n Grill", 
-        bathroomInfo: { numBathrooms: 1, toiletsPerBathroom: 1, sinksPerBathroom: 1 },
-        breakroomInfo: 1,
-        contactPerson: { firstName: "Karen", lastName: "McNormy" },
-        location: { city: "Denver", postCode: "80229", steet: {number: 1, street: "Some St"} },
-        phone: "555-555-5555", 
-        personImage: "url",
-        cost: 40
-    }
-    let favoriteJobs = [{
-        jobId: "3",
-        businessName: "Joe's Bar n Grill", 
-        bathroomInfo: { numBathrooms: 1, toiletsPerBathroom: 1, sinksPerBathroom: 1 },
-        breakroomInfo: 1,
-        contactPerson: { firstName: "Karen", lastName: "McNormy" },
-        location: { city: "Denver", postCode: "80229", steet: {number: 1, street: "Some St"} },
-        phone: "555-555-5555", 
-        personImage: "url",
-        cost: 40
-    }]
-    let setFavoriteJobs = [{
-        jobId: "3",
-        businessName: "Joe's Bar n Grill", 
-        bathroomInfo: { numBathrooms: 1, toiletsPerBathroom: 1, sinksPerBathroom: 1 },
-        breakroomInfo: 1,
-        contactPerson: { firstName: "Karen", lastName: "McNormy" },
-        location: { city: "Denver", postCode: "80229", steet: {number: 1, street: "Some St"} },
-        phone: "555-555-5555", 
-        personImage: "url",
-        cost: 40
-    }]
 
     beforeEach(() => {
-        mount(
-            <JobPageElement 
-                availableJobs={ availableJobsList } 
-                jobId={ jobId } 
-                currentJob={ currentJob } 
-                favoriteJobs={ favoriteJobs } 
-                setFavoriteJobs={ setFavoriteJobs }
-            />
-        )
+        cy.visit('/')
     })
 
     it("should display the job page", () => {
-        cy.get(".job-info-page").should("be.visible")
+        cy.get(".todays-jobs").within(() => {
+            cy.get(".job-links:eq(0)").click()
+        })
+        cy.get(".current-job-card").should("be.visible")
+        cy.get(".image-container").should("be.visible")
+        cy.get(".contact-image").should("be.visible")
+        cy.get(".contact-name").should("be.visible")
+        cy.get(".contact-phone").should("be.visible")
+        cy.get(".street-address").should("be.visible")
+        cy.get(".address").should("be.visible")
+        cy.get(".bathroom-info").should("be.visible")
+        cy.get(".breakroom-info").should("be.visible")
+        cy.get(".cost").should("be.visible")
+        cy.get(".button-container").should("be.visible")
+        cy.get(".job-button:eq(0)").should("be.visible")
+        // cy.get('[src*="../assets/stopwatch.png"]').should("be.visible")
+        cy.get(".job-button:eq(1)").should("be.visible")
     })
 })
+
+
+    

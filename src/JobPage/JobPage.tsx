@@ -32,12 +32,12 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                     <img className="contact-image" src={ large } alt="contact person" />
                 </section>
                 <h3 className="contact-name">{ first } { last }</h3>
-                <p className="contact-name">{ phone }</p>
+                <p className="contact-phone">{ phone }</p>
                 <h4 className="street-address">{ name } { number }</h4>
                 <h4 className="address">{ city }, CO { postcode  }</h4>
-                <p>{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
-                <p>{ breakroomInfo } breakrooms.</p>
-                <p>${ cost }</p>
+                <p className="bathroom-info" >{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
+                <p className="breakroom-info" >{ breakroomInfo } breakrooms.</p>
+                <p className="cost" >${ cost }</p>
                 <section className="button-container">
                     <Link
                         to={ `rate-job-form${jobId}` }

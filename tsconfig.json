@@ -22,6 +22,6 @@
   },
   "include": [
     "src",
-    "react-app-env.d.ts"
+    "react-app-env.d.ts", "cypress"
   ]
 }
