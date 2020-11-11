@@ -30,14 +30,14 @@ const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
                             id={jobId}
                             key={ jobId }
                         >
-                            <p>{ time }</p>
-                            <h3>{ businessName }</h3>
-                            <h3>{number} {name}</h3>
-                            <h3>{city} {postcode}</h3>
-                            <h5>{`${first} ${last}`}</h5>
-                            <p>{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
-                            <p>{ breakroomInfo } breakrooms.</p>
-                            <p>${ cost }</p>
+                            <p className="job-time">{ time }</p>
+                            <h3 className="job-name">{ businessName }</h3>
+                            <h3 className="job-address">{number} {name}</h3>
+                            <h3 className="city-state">{city} {postcode}</h3>
+                            <h5 className="contact-person">{`${first} ${last}`}</h5>
+                            <p className="bathroom-info">{ numBathrooms } bathrooms with { toiletsPerBathroom } toilets and { sinksPerBathroom } sinks. </p>
+                            <p className="breakroom-info">{ breakroomInfo } breakrooms.</p>
+                            <p className="job-cost">${ cost }</p>
                         </section>
                     </Link>
                 )
