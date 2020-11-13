@@ -7,7 +7,7 @@ const OptionsPage : React.FC <optionsPage> = (props) => {
 
     return (
         <section>
-            <p>Welcome back Michael!</p>
+            <p className="user-greeting">Welcome back Michael!</p>
             {/* <image></image> */}
             <Link
                 to='/completed-jobs'
