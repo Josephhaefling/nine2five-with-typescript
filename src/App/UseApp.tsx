@@ -106,7 +106,8 @@ function useApp(availableJobsList : object[]) : UseApp {
     }
 
     const addBusinessListToState = async () => {
-        const people = await getRandomPeople()
+        const people = await getRandomPeople()  
+        console.log("people:", people)      
         const peopleInColo = movePeopleToColo(people.results)   
         const businessList = turnPeopleIntoBusiness(peopleInColo)                
         const availableJobs = createJob(businessList)        

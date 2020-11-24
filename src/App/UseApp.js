@@ -87,6 +87,7 @@ function useApp(availableJobsList) {
                 case 0: return [4 /*yield*/, getRandomPeople()];
                 case 1:
                     people = _a.sent();
+                    console.log("people:", people);
                     peopleInColo = movePeopleToColo(people.results);
                     businessList = turnPeopleIntoBusiness(peopleInColo);
                     availableJobs = createJob(businessList);

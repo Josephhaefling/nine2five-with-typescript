@@ -1,6 +1,7 @@
 .job-card {
-    box-shadow: 2px 7px 4px 2px #403D39, 0px 2px 4px 5px #403D39;
-    color: #403D39;
+    background-color: #403D39;
+    box-shadow: 0px -1px 2px 0px #CCC5B9, 0px 1px 6px 1px #CCC5B9;
+    color: #CCC5B9;
     padding: 2%;
     height: 35vh;
 }
@@ -11,12 +12,17 @@ h3, h5 {
 }
 
 h2 {
+    color: #EB5E28;
     text-align: center;
     margin-bottom: 0%;
 }
 
 p {
     text-align: center;
+}
+
+.job-time, .job-cost, .job-name {
+    color: #EB5E28;
 }
 
 .job-links {
@@ -35,6 +41,7 @@ p {
 }
 
 .todays-jobs {
+    /* background-color: #FFFCF2; */
     display: flex;
     flex-wrap: wrap;
     height: 100%;
