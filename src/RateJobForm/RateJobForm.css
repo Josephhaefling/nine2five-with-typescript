@@ -1,4 +1,6 @@
 .rate-job-page {
+    background-color: #FFFCF2;
+    border-radius: 3%;
     display: flex;
     justify-content: center;
     margin-top: 2%;
@@ -7,12 +9,14 @@
 
 form {
     align-items: center;
-    box-shadow: 2px 7px 4px 2px #403D39, 0px 2px 4px 5px #403D39;
+    background-color: #403d39;
+    box-shadow: 0px -1px 2px 0px #403D39, 0px 1px 6px 1px #403D39;
+    color: #FFFCF2;
     display: flex;
     flex-direction: column;
-    height: 95%;
+    height: 82vh;
     margin-top: 2%;
-    width: 80%;
+    width: 50vw;
 }
 
 .question-container {
@@ -36,5 +40,6 @@ form {
 }
 
 h1 {
+    color: #EB5E28;
     margin-bottom: 0;
 }

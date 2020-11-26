@@ -1,22 +1,26 @@
 .job-info-page {
+    background-color: #FFFCF2;
     display: flex;
     justify-content: center;
 }
 
 .current-job-card {
     align-content: center;
+    background-color: #403D39;
     border-radius: 1%;
-    box-shadow: 2px 7px 4px 2px #403D39, 0px 2px 4px 5px #403D39;
+    box-shadow: 0px -1px 2px 0px #403D39, 0px 1px 6px 1px #403D39;
+    color: #FFFCF2;
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 75vh;
     justify-content: center;
     margin-top: 5%;
-    width: 60vw;
+    width: 50vw;
 }
 
 .image-container {
     align-self: center;
+    box-shadow: 0px -1px 2px 0px #252422, 0px 1px 6px 1px #252422;
     height: auto;
     margin-bottom: 3%;
     margin-top: 3%;

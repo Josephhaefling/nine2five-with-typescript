@@ -1,6 +1,6 @@
 .job-card {
     background-color: #403D39;
-    box-shadow: 0px -1px 2px 0px #CCC5B9, 0px 1px 6px 1px #CCC5B9;
+    box-shadow: 0px -1px 2px 0px #403D39, 0px 1px 6px 1px #403D39;
     color: #CCC5B9;
     padding: 2%;
     height: 35vh;
@@ -21,7 +21,7 @@ p {
     text-align: center;
 }
 
-.job-time, .job-cost, .job-name {
+.contact-person, .job-cost, .job-name {
     color: #EB5E28;
 }
 
