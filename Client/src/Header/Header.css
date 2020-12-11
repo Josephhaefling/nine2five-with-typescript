@@ -1,0 +1,29 @@
+/* FFFCF2 - off white
+CCC5B9 light grey
+403D39 dark grey
+252422 black
+EB5E28 orange */
+
+
+.nav-bar {
+    background-color: #403D39;
+    border-bottom: 1px solid #252422;
+    color: #EB5E28;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em 0 1em;
+}   
+
+.user-image-container {
+    color : #EB5E28;
+    height: 8vh;
+    margin-top: 3%;
+    width: 4vw;
+}
+
+.options-button {
+    color : #EB5E28;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}   

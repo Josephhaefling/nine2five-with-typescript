@@ -1,0 +1,50 @@
+.job-card {
+    background-color: #CCC5B9;
+    box-shadow: 0px -1px 2px 0px #403D39, 0px 1px 6px 1px #403D39;
+    color: #252422;
+    padding: 2%;
+    height: 35vh;
+}
+
+h3, h5 {
+    text-align: center;
+    margin: 0 0 2% 0;
+}
+
+h2 {
+    color: #EB5E28;
+    text-align: center;
+    margin-bottom: 0%;
+}
+
+p {
+    text-align: center;
+}
+
+.contact-person, .job-cost, .job-name {
+    color: #EB5E28;
+}
+
+.job-links {
+    flex-wrap: wrap;
+    height: 34%;
+    width: 40%; 
+    margin-top: 12%;
+    text-decoration: none;
+}
+
+.todays-jobs-display {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    width: 100vw;
+}
+
+.todays-jobs {
+    /* background-color: #FFFCF2; */
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-around;
+    padding: 0% 2% 8% 2%;
+}
