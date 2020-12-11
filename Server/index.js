@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
 
-import postRoutes from "./routes/posts.js"
+import favoritesRoutes from "./routes/favorites.js"
 
 const app = express()
 
@@ -11,7 +11,7 @@ app.use(bodyParser.json({limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
 app.use(cors())
 
-app.use("/posts", postRoutes)
+app.use("/favorites", favoritesRoutes)
 
 const CONNECTION_URL = "mongodb+srv://meanjoebean:meanjoebean123@cluster0.sntkh.mongodb.net/nine2Five?retryWrites=true&w=majority"
 const PORT = process.env.PORT || 5000

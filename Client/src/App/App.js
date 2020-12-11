@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var react_1 = __importStar(require("react"));
+var react_redux_1 = require("react-redux");
 require("./App.css");
 var react_router_dom_1 = require("react-router-dom");
 var UseApp_1 = __importDefault(require("../App/UseApp"));
@@ -33,7 +34,15 @@ var RateJobForm_1 = __importDefault(require("../RateJobForm/RateJobForm"));
 var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
 var FavoriteJobsPage_1 = __importDefault(require("../FavoriteJobsPage/FavoriteJobsPage"));
 var CompletedJobPage_1 = __importDefault(require("../CompletedJobsPage/CompletedJobPage"));
+var favorites = require("../actions/favorites");
+var react_redux_2 = require("react-redux");
 function App() {
+    var posts = react_redux_2.useSelector(function (state) { return state; });
+    console.log("posts:", posts);
+    var dispatch = react_redux_1.useDispatch();
+    react_1.useEffect(function () {
+        dispatch(favorites.getFavorites());
+    }, [dispatch]);
     var NoJobSelected = {
         cost: "",
         employeeId: 0,

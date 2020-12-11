@@ -1,4 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from 'react'
+import { useDispatch } from 'react-redux';
 import './App.css';
 import { Switch, Route, withRouter, Link } from 'react-router-dom'
 import moment from 'moment';
@@ -11,8 +12,17 @@ import JobPage from '../JobPage/JobPage'
 import FavoriteJobsPage from '../FavoriteJobsPage/FavoriteJobsPage'
 import CompletedJobPage from "../CompletedJobsPage/CompletedJobPage"
 import { Job, noJobSelected } from "../home-data"
-
+import { getFavorites } from '../actions/favorites';
+import { useSelector } from 'react-redux';
 function App() : JSX.Element {
+  const posts = useSelector((state) => state);
+  console.log("posts:", posts);
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFavorites())
+  }, [dispatch])
 
   const NoJobSelected : noJobSelected = {
     cost: "",
