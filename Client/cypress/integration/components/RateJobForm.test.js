@@ -1,0 +1,33 @@
+describe("RateJobForm", () => {
+
+    beforeEach(() => {
+            cy.visit("/")
+    })
+
+    it("should display the RateJobForm", () => {
+        cy.get(".job-links:eq(0)").click()
+        cy.get(".job-button:eq(0)").click()
+        cy.get(".job-button:eq(0)").click()
+        cy.get(".rate-business-questions:eq(0)").should("be.visible")
+        cy.get(".rate-business-questions:eq(1)").should("be.visible")
+        cy.get(".rate-business-questions:eq(2)").should("be.visible")
+        cy.get(".rate-business-questions:eq(3)").should("be.visible")
+        cy.get(".rate-business-questions:eq(4)").should("be.visible")
+        cy.get(".rate-business-questions:eq(5)").should("be.visible")
+        cy.get(".rate-business-questions:eq(6)").should("be.visible")
+        cy.get(".rate-business-questions:eq(7)").should("be.visible")
+        cy.get(".rate-business-questions:eq(8)").should("be.visible")
+        cy.get(".rate-business-questions:eq(9)").should("be.visible")
+        cy.get(".question-container:eq(0)").click()
+        cy.get(".question-container:eq(1)").click()
+        cy.get(".question-container:eq(2)").click()
+        cy.get(".question-container:eq(3)").click()
+        cy.get(".question-container:eq(4)").click()
+        cy.get(".question-container:eq(5)").click()
+        cy.get(".question-container:eq(6)").click()
+        cy.get(".question-container:eq(7)").click()
+        cy.get(".question-container:eq(8)").click()
+        cy.get(".question-container:eq(9)").click()
+        cy.contains("Submit").click()
+    })
+})
