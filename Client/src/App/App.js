@@ -34,14 +34,11 @@ var RateJobForm_1 = __importDefault(require("../RateJobForm/RateJobForm"));
 var JobPage_1 = __importDefault(require("../JobPage/JobPage"));
 var FavoriteJobsPage_1 = __importDefault(require("../FavoriteJobsPage/FavoriteJobsPage"));
 var CompletedJobPage_1 = __importDefault(require("../CompletedJobsPage/CompletedJobPage"));
-var favorites = require("../actions/favorites");
-var react_redux_2 = require("react-redux");
+var favorites_1 = require("../actions/favorites");
 function App() {
-    var posts = react_redux_2.useSelector(function (state) { return state; });
-    console.log("posts:", posts);
     var dispatch = react_redux_1.useDispatch();
     react_1.useEffect(function () {
-        dispatch(favorites.getFavorites());
+        dispatch(favorites_1.getFavorites());
     }, [dispatch]);
     var NoJobSelected = {
         cost: "",

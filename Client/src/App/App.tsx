@@ -12,11 +12,8 @@ import JobPage from '../JobPage/JobPage'
 import FavoriteJobsPage from '../FavoriteJobsPage/FavoriteJobsPage'
 import CompletedJobPage from "../CompletedJobsPage/CompletedJobPage"
 import { Job, noJobSelected } from "../home-data"
-import { getFavorites } from '../actions/favorites';
-import { useSelector } from 'react-redux';
+import { getFavorites, createFavorite } from '../actions/favorites';
 function App() : JSX.Element {
-  const posts = useSelector((state) => state);
-  console.log("posts:", posts);
   
   const dispatch = useDispatch();
 

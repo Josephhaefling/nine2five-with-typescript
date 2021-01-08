@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { jobsContainer, BathroomInfo, Job, ContactPerson, Location, Street } from "../home-data"
 import { JsxEmit } from "typescript"
 
-
 const JobsContainer: FC <jobsContainer> = (props) : JSX.Element => {
         
     const getJobObjects = (currentUserJobs : Job[]) => {

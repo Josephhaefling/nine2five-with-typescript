@@ -4,6 +4,8 @@ export const getFavorites = async (req, res) => {
     try {
         const favoritesMessage = await FavoritesMessage.find();
 
+        console.log("favs message", favoritesMessage)
+
         res.status(200).json(favoritesMessage)
 
     } catch(error) {
@@ -21,7 +23,7 @@ export const getCompletedJobs = async (req, res) => {
 //Left off here trying to figure out how to add favorites to the backend when you click the heart.
 //
 //
-export const postFavorites = async (req, res) => {
+export const createFavorite = async (req, res) => {
     try {
         const favoritesMessage = await FavoritesMessage.find();
 
@@ -32,7 +34,7 @@ export const postFavorites = async (req, res) => {
     }
 }
 
-export const postCompletedJobs = async (req, res) => {
+export const createCompletedJob = async (req, res) => {
     try {
 
     } catch(error) {

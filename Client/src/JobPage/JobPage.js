@@ -18,13 +18,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -33,6 +26,9 @@ var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
 require("../JobPage/JobPage.css");
 var moment_1 = __importDefault(require("moment"));
+var react_redux_1 = require("react-redux");
+var favorites_1 = require("../actions/favorites");
+var react_redux_2 = require("react-redux");
 var favorite = require("../assets/favorited.png");
 var notFavorite = require("../assets/notFavorited.png");
 var started = require("../assets/finish-flag.png");
@@ -48,6 +44,14 @@ var JobPage = function (props) {
     var city = location.city, postcode = location.postcode, street = location.street;
     var number = street.number, name = street.name;
     var large = personImage.large;
+    var dispatch = react_redux_1.useDispatch();
+    var favJobs = react_redux_2.useSelector(function (state) { return state; });
+    var _d = react_1.useState({}), favorites = _d[0], setFavorites = _d[1];
+    var handleClick = function (e, currentJob) {
+        console.log(favorites);
+        e.preventDefault();
+        dispatch(favorites_1.createFavorite(favorites));
+    };
     return (react_1["default"].createElement("section", { className: "job-info-page" },
         react_1["default"].createElement("section", { className: "current-job-card" },
             react_1["default"].createElement("section", { className: "image-container" },
@@ -88,9 +92,8 @@ var JobPage = function (props) {
                     } },
                     react_1["default"].createElement("img", { alt: "start job button", src: jobStarted ? started : notStarted, className: "job-button" })),
                 react_1["default"].createElement("img", { className: "job-button", src: isFavorite ? favorite : notFavorite, alt: "finish job button", onClick: function (e) {
-                        var newFavorites = isFavorite && props.favoriteJobs.filter(function (job) { return job.jobId !== currentJob.jobId; });
-                        isFavorite ? setIsFavorite(!isFavorite) : setIsFavorite(!isFavorite);
-                        isFavorite ? props.setFavoriteJobs(newFavorites) : props.setFavoriteJobs(__spreadArrays(props.favoriteJobs, [currentJob]));
+                        setFavorites(currentJob);
+                        handleClick(e, currentJob);
                     } })))));
 };
 exports["default"] = JobPage;

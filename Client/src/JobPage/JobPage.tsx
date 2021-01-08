@@ -1,9 +1,12 @@
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
-import { isJsxAttribute, isJsxElement, JsxAttribute, JsxElement, JsxEmit, updateJsxAttributes } from "typescript"
+// import { isJsxAttribute, isJsxElement, JsxAttribute, JsxElement, JsxEmit, updateJsxAttributes } from "typescript"
 import { Bathroom, Job, ContactPerson, Location, Street, PersonImage, Props, jobPage, noJobSelected } from "../home-data"
 import "../JobPage/JobPage.css"
 import moment from 'moment'
+import { useDispatch } from "react-redux"
+import { createFavorite } from "../actions/favorites"
+import { useSelector } from 'react-redux';
 
 const favorite = require("../assets/favorited.png")
 const notFavorite = require("../assets/notFavorited.png")
@@ -11,7 +14,6 @@ const started = require("../assets/finish-flag.png")
 const notStarted = require("../assets/stopwatch.png")
 
 const JobPage : FC <jobPage> = (props) : JSX.Element => {
-    
     
     const [ jobStarted, setJobStarted] = useState <boolean> (false)
     const [ startTime, setStartTime ] = useState <string> ("")
@@ -24,6 +26,18 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
     const { city, postcode, street } = location
     const { number, name } = street
     const { large } = personImage
+
+    
+    const dispatch = useDispatch()
+    
+    const favJobs = useSelector((state) => state);
+    
+    const [ favorites, setFavorites ] = useState <object>({})
+
+    const handleClick = (e : any, currentJob : any) => {
+        e.preventDefault()        
+        dispatch(createFavorite(favorites))
+    }
 
     return (
         <section className="job-info-page">
@@ -64,12 +78,13 @@ const JobPage : FC <jobPage> = (props) : JSX.Element => {
                             className="job-button"
                             src={ isFavorite ? favorite : notFavorite }
                             alt="finish job button"
-                            onClick={ (e) => { 
-                                const newFavorites = isFavorite && props.favoriteJobs.filter((job : Job) => job.jobId !== currentJob.jobId)
-                                isFavorite ? setIsFavorite(!isFavorite) : setIsFavorite(!isFavorite)
-                                isFavorite ?  props.setFavoriteJobs(newFavorites): props.setFavoriteJobs([...props.favoriteJobs, currentJob])
-                            }
-                         }
+                            onClick={ (e) => {
+                                setFavorites(currentJob)
+                                handleClick(e, currentJob) 
+                            }}
+                                // const newFavorites = isFavorite && props.favoriteJobs.filter((job : Job) => job.jobId !== currentJob.jobId)
+                                // isFavorite ? setIsFavorite(!isFavorite) : setIsFavorite(!isFavorite)
+                                // isFavorite ?  props.setFavoriteJobs(newFavorites): props.setFavoriteJobs([...props.favoriteJobs, currentJob])
                             />
                 </section>
             </section>
